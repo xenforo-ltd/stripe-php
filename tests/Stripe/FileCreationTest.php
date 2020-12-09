@@ -19,7 +19,7 @@ final class FileCreationTest extends \PHPUnit\Framework\TestCase
     private $origApiUploadBase;
 
     /** @before */
-    public function setUpUploadBase()
+    public function setUpUploadBase(): void
     {
         $this->origApiBase = Stripe::$apiBase;
         $this->origApiUploadBase = Stripe::$apiUploadBase;
@@ -29,13 +29,13 @@ final class FileCreationTest extends \PHPUnit\Framework\TestCase
     }
 
     /** @after */
-    public function tearDownUploadBase()
+    public function tearDownUploadBase(): void
     {
         Stripe::$apiBase = $this->origApiBase;
         Stripe::$apiUploadBase = $this->origApiUploadBase;
     }
 
-    public function testIsCreatableWithFileHandle()
+    public function testIsCreatableWithFileHandle(): void
     {
         $this->expectsRequest(
             'post',
@@ -54,7 +54,7 @@ final class FileCreationTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\File::class, $resource);
     }
 
-    public function testIsCreatableWithCURLFile()
+    public function testIsCreatableWithCURLFile(): void
     {
         $this->expectsRequest(
             'post',

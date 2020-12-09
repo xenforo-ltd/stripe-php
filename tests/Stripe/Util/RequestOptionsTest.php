@@ -12,7 +12,7 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
 {
     use \Stripe\TestHelper;
 
-    public function testParseString()
+    public function testParseString(): void
     {
         $opts = RequestOptions::parse('foo');
         static::assertSame('foo', $opts->apiKey);
@@ -20,7 +20,7 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
         static::assertNull($opts->apiBase);
     }
 
-    public function testParseStringStrict()
+    public function testParseStringStrict(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessageRegExp('#Do not pass a string for request options.#');
@@ -28,7 +28,7 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
         $opts = RequestOptions::parse('foo', true);
     }
 
-    public function testParseNull()
+    public function testParseNull(): void
     {
         $opts = RequestOptions::parse(null);
         static::assertNull($opts->apiKey);
@@ -36,7 +36,7 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
         static::assertNull($opts->apiBase);
     }
 
-    public function testParseArrayEmpty()
+    public function testParseArrayEmpty(): void
     {
         $opts = RequestOptions::parse([]);
         static::assertNull($opts->apiKey);
@@ -44,7 +44,7 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
         static::assertNull($opts->apiBase);
     }
 
-    public function testParseArrayWithAPIKey()
+    public function testParseArrayWithAPIKey(): void
     {
         $opts = RequestOptions::parse(
             [
@@ -56,7 +56,7 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
         static::assertNull($opts->apiBase);
     }
 
-    public function testParseArrayWithIdempotencyKey()
+    public function testParseArrayWithIdempotencyKey(): void
     {
         $opts = RequestOptions::parse(
             [
@@ -68,7 +68,7 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
         static::assertNull($opts->apiBase);
     }
 
-    public function testParseArrayWithAPIKeyAndIdempotencyKey()
+    public function testParseArrayWithAPIKeyAndIdempotencyKey(): void
     {
         $opts = RequestOptions::parse(
             [
@@ -81,7 +81,7 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
         static::assertNull($opts->apiBase);
     }
 
-    public function testParseArrayWithAPIKeyAndUnexpectedKeys()
+    public function testParseArrayWithAPIKeyAndUnexpectedKeys(): void
     {
         $opts = RequestOptions::parse(
             [
@@ -94,7 +94,7 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
         static::assertNull($opts->apiBase);
     }
 
-    public function testParseArrayWithAPIKeyAndUnexpectedKeysStrict()
+    public function testParseArrayWithAPIKeyAndUnexpectedKeysStrict(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('Got unexpected keys in options array: foo');
@@ -108,7 +108,7 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testParseArrayWithAPIBase()
+    public function testParseArrayWithAPIBase(): void
     {
         $opts = RequestOptions::parse(
             [
@@ -120,14 +120,14 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
         static::assertSame('https://example.com', $opts->apiBase);
     }
 
-    public function testParseWrongType()
+    public function testParseWrongType(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
 
         $opts = RequestOptions::parse(5);
     }
 
-    public function testMerge()
+    public function testMerge(): void
     {
         $baseOpts = RequestOptions::parse(
             [
@@ -145,7 +145,7 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
         static::assertNull($opts->apiBase);
     }
 
-    public function testDiscardNonPersistentHeaders()
+    public function testDiscardNonPersistentHeaders(): void
     {
         $opts = RequestOptions::parse(
             [
@@ -157,7 +157,7 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
         static::assertSame(['Stripe-Account' => 'foo'], $opts->headers);
     }
 
-    public function testDebugInfo()
+    public function testDebugInfo(): void
     {
         $opts = RequestOptions::parse(['api_key' => 'sk_test_1234567890abcdefghijklmn']);
         $debugInfo = \print_r($opts, true);

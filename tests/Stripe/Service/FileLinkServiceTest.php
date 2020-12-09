@@ -23,13 +23,13 @@ final class FileLinkServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new FileLinkService($this->client);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $this->expectsRequest(
             'get',
@@ -40,7 +40,7 @@ final class FileLinkServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\FileLink::class, $resources->data[0]);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->expectsRequest(
             'post',
@@ -52,7 +52,7 @@ final class FileLinkServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\FileLink::class, $resource);
     }
 
-    public function testRetrieve()
+    public function testRetrieve(): void
     {
         $this->expectsRequest(
             'get',
@@ -62,7 +62,7 @@ final class FileLinkServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\FileLink::class, $resource);
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $this->expectsRequest(
             'post',

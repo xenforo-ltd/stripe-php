@@ -12,7 +12,7 @@ final class SignatureVerificationExceptionTest extends \PHPUnit\Framework\TestCa
 {
     use \Stripe\TestHelper;
 
-    public function testGetters()
+    public function testGetters(): void
     {
         $e = SignatureVerificationException::factory('message', 'payload', 'sig_header');
         static::assertSame('message', $e->getMessage());

@@ -23,13 +23,13 @@ final class CreditNoteServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new CreditNoteService($this->client);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $this->expectsRequest(
             'get',
@@ -40,7 +40,7 @@ final class CreditNoteServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CreditNote::class, $resources->data[0]);
     }
 
-    public function testAllLines()
+    public function testAllLines(): void
     {
         $this->expectsRequest(
             'get',
@@ -51,7 +51,7 @@ final class CreditNoteServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CreditNoteLineItem::class, $resources->data[0]);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->expectsRequest(
             'post',
@@ -65,7 +65,7 @@ final class CreditNoteServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CreditNote::class, $resource);
     }
 
-    public function testPreview()
+    public function testPreview(): void
     {
         $this->expectsRequest(
             'get',
@@ -78,7 +78,7 @@ final class CreditNoteServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CreditNote::class, $resource);
     }
 
-    public function testPreviewLines()
+    public function testPreviewLines(): void
     {
         $this->expectsRequest(
             'get',
@@ -92,7 +92,7 @@ final class CreditNoteServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CreditNoteLineItem::class, $resources->data[0]);
     }
 
-    public function testRetrieve()
+    public function testRetrieve(): void
     {
         $this->expectsRequest(
             'get',
@@ -102,7 +102,7 @@ final class CreditNoteServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CreditNote::class, $resource);
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $this->expectsRequest(
             'post',
@@ -114,7 +114,7 @@ final class CreditNoteServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CreditNote::class, $resource);
     }
 
-    public function testVoidCreditNote()
+    public function testVoidCreditNote(): void
     {
         $this->expectsRequest(
             'post',

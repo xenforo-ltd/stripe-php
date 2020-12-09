@@ -37,7 +37,7 @@ abstract class ApiResource extends StripeObject
      */
     public $saveWithParent = false;
 
-    public function __set($k, $v)
+    public function __set($k, $v): void
     {
         parent::__set($k, $v);
         $v = $this->{$k};

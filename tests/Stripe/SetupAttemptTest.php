@@ -12,7 +12,7 @@ final class SetupAttemptTest extends \PHPUnit\Framework\TestCase
 {
     use TestHelper;
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',

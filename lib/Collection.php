@@ -44,7 +44,7 @@ class Collection extends StripeObject implements \Countable, \IteratorAggregate
      *
      * @param array $filters the filters
      */
-    public function setFilters($filters)
+    public function setFilters($filters): void
     {
         $this->filters = $filters;
     }

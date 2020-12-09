@@ -14,7 +14,7 @@ final class SourceTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'src_123';
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -24,7 +24,7 @@ final class SourceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Source::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -36,7 +36,7 @@ final class SourceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Source::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Source::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -48,7 +48,7 @@ final class SourceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Source::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -60,7 +60,7 @@ final class SourceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Source::class, $resource);
     }
 
-    public function testCanSaveCardExpiryDate()
+    public function testCanSaveCardExpiryDate(): void
     {
         $response = [
             'id' => 'src_foo',
@@ -96,7 +96,7 @@ final class SourceTest extends \PHPUnit\Framework\TestCase
         static::assertSame(2022, $source->card->exp_year);
     }
 
-    public function testIsDetachableWhenAttached()
+    public function testIsDetachableWhenAttached(): void
     {
         $resource = Source::retrieve(self::TEST_RESOURCE_ID);
         $resource->customer = 'cus_123';
@@ -108,7 +108,7 @@ final class SourceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Source::class, $resource);
     }
 
-    public function testIsNotDetachableWhenUnattached()
+    public function testIsNotDetachableWhenUnattached(): void
     {
         $this->expectException(\Stripe\Exception\UnexpectedValueException::class);
 
@@ -116,7 +116,7 @@ final class SourceTest extends \PHPUnit\Framework\TestCase
         $resource->detach();
     }
 
-    public function testCanListSourceTransactionsDeprecated()
+    public function testCanListSourceTransactionsDeprecated(): void
     {
         $source = Source::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -128,7 +128,7 @@ final class SourceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SourceTransaction::class, $resources->data[0]);
     }
 
-    public function testCanListSourceTransactions()
+    public function testCanListSourceTransactions(): void
     {
         $this->expectsRequest(
             'get',
@@ -139,7 +139,7 @@ final class SourceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SourceTransaction::class, $resources->data[0]);
     }
 
-    public function testCanVerify()
+    public function testCanVerify(): void
     {
         $resource = Source::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

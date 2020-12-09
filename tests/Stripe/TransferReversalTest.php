@@ -15,7 +15,7 @@ final class TransferReversalTest extends \PHPUnit\Framework\TestCase
     const TEST_RESOURCE_ID = 'trr_123';
     const TEST_TRANSFER_ID = 'tr_123';
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Transfer::retrieveReversal(self::TEST_TRANSFER_ID, self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';

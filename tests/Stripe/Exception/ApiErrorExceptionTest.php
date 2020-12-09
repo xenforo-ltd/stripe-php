@@ -29,7 +29,7 @@ final class ApiErrorExceptionTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetters()
+    public function testGetters(): void
     {
         $e = $this->createFixture();
         static::assertSame(200, $e->getHttpStatus());
@@ -42,7 +42,7 @@ final class ApiErrorExceptionTest extends \PHPUnit\Framework\TestCase
         static::assertSame('some_code', $e->getError()->code);
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $e = $this->createFixture();
         static::assertContains('(Request req_test)', (string) $e);

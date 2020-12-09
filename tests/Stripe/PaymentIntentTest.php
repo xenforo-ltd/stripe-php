@@ -14,7 +14,7 @@ final class PaymentIntentTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'pi_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class PaymentIntentTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentIntent::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class PaymentIntentTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentIntent::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -49,7 +49,7 @@ final class PaymentIntentTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentIntent::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = PaymentIntent::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -61,7 +61,7 @@ final class PaymentIntentTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentIntent::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -76,7 +76,7 @@ final class PaymentIntentTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentIntent::class, $resource);
     }
 
-    public function testIsCancelable()
+    public function testIsCancelable(): void
     {
         $resource = PaymentIntent::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -87,7 +87,7 @@ final class PaymentIntentTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentIntent::class, $resource);
     }
 
-    public function testIsCapturable()
+    public function testIsCapturable(): void
     {
         $resource = PaymentIntent::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -98,7 +98,7 @@ final class PaymentIntentTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentIntent::class, $resource);
     }
 
-    public function testIsConfirmable()
+    public function testIsConfirmable(): void
     {
         $resource = PaymentIntent::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

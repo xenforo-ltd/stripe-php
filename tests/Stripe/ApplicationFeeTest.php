@@ -15,7 +15,7 @@ final class ApplicationFeeTest extends \PHPUnit\Framework\TestCase
     const TEST_RESOURCE_ID = 'fee_123';
     const TEST_FEEREFUND_ID = 'fr_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -26,7 +26,7 @@ final class ApplicationFeeTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\ApplicationFee::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -36,7 +36,7 @@ final class ApplicationFeeTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\ApplicationFee::class, $resource);
     }
 
-    public function testCanCreateRefund()
+    public function testCanCreateRefund(): void
     {
         $this->expectsRequest(
             'post',
@@ -46,7 +46,7 @@ final class ApplicationFeeTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\ApplicationFeeRefund::class, $resource);
     }
 
-    public function testCanRetrieveRefund()
+    public function testCanRetrieveRefund(): void
     {
         $this->expectsRequest(
             'get',
@@ -56,7 +56,7 @@ final class ApplicationFeeTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\ApplicationFeeRefund::class, $resource);
     }
 
-    public function testCanUpdateRefund()
+    public function testCanUpdateRefund(): void
     {
         $this->expectsRequest(
             'post',
@@ -66,7 +66,7 @@ final class ApplicationFeeTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\ApplicationFeeRefund::class, $resource);
     }
 
-    public function testCanListRefunds()
+    public function testCanListRefunds(): void
     {
         $this->expectsRequest(
             'get',

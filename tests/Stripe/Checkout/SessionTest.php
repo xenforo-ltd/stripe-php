@@ -14,7 +14,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'cs_123';
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -44,7 +44,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Checkout\Session::class, $resource);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -54,7 +54,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Checkout\Session::class, $resource);
     }
 
-    public function testCanListLineItems()
+    public function testCanListLineItems(): void
     {
         $this->expectsRequest(
             'get',

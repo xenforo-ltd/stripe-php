@@ -15,7 +15,7 @@ final class CapabilityTest extends \PHPUnit\Framework\TestCase
     const TEST_ACCOUNT_ID = 'acct_123';
     const TEST_RESOURCE_ID = 'acap_123';
 
-    public function testHasCorrectUrl()
+    public function testHasCorrectUrl(): void
     {
         $resource = \Stripe\Account::retrieveCapability(self::TEST_ACCOUNT_ID, self::TEST_RESOURCE_ID);
         static::assertSame(
@@ -24,14 +24,14 @@ final class CapabilityTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testIsNotDirectlyRetrievable()
+    public function testIsNotDirectlyRetrievable(): void
     {
         $this->expectException(\Stripe\Exception\BadMethodCallException::class);
 
         Capability::retrieve(self::TEST_RESOURCE_ID);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = \Stripe\Account::retrieveCapability(self::TEST_ACCOUNT_ID, self::TEST_RESOURCE_ID);
         $resource->requested = true;
@@ -43,7 +43,7 @@ final class CapabilityTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Capability::class, $resource);
     }
 
-    public function testIsNotDirectlyUpdatable()
+    public function testIsNotDirectlyUpdatable(): void
     {
         $this->expectException(\Stripe\Exception\BadMethodCallException::class);
 

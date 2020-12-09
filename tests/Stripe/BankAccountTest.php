@@ -33,7 +33,7 @@ final class BankAccountTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testHasCorrectUrlForCustomer()
+    public function testHasCorrectUrlForCustomer(): void
     {
         $resource = $this->createFixture(['customer' => 'cus_123']);
         static::assertSame(
@@ -42,7 +42,7 @@ final class BankAccountTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testHasCorrectUrlForAccount()
+    public function testHasCorrectUrlForAccount(): void
     {
         $resource = $this->createFixture(['account' => 'acct_123']);
         static::assertSame(
@@ -51,14 +51,14 @@ final class BankAccountTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testIsNotDirectlyRetrievable()
+    public function testIsNotDirectlyRetrievable(): void
     {
         $this->expectException(\Stripe\Exception\BadMethodCallException::class);
 
         BankAccount::retrieve(self::TEST_RESOURCE_ID);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = $this->createFixture();
         $resource->metadata['key'] = 'value';
@@ -70,7 +70,7 @@ final class BankAccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame(\Stripe\BankAccount::class, \get_class($resource));
     }
 
-    public function testIsNotDirectlyUpdatable()
+    public function testIsNotDirectlyUpdatable(): void
     {
         $this->expectException(\Stripe\Exception\BadMethodCallException::class);
 
@@ -79,7 +79,7 @@ final class BankAccountTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $resource = $this->createFixture();
         $this->expectsRequest(
@@ -90,7 +90,7 @@ final class BankAccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame(\Stripe\BankAccount::class, \get_class($resource));
     }
 
-    public function testIsVerifiable()
+    public function testIsVerifiable(): void
     {
         $resource = $this->createFixture();
         $this->expectsRequest(

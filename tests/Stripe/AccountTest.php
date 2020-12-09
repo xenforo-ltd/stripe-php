@@ -17,7 +17,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
     const TEST_EXTERNALACCOUNT_ID = 'ba_123';
     const TEST_PERSON_ID = 'person_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -28,7 +28,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Account::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -38,7 +38,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Account::class, $resource);
     }
 
-    public function testIsRetrievableWithoutId()
+    public function testIsRetrievableWithoutId(): void
     {
         $this->expectsRequest(
             'get',
@@ -48,7 +48,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Account::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -58,7 +58,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Account::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Account::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -70,7 +70,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Account::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -82,7 +82,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Account::class, $resource);
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $resource = Account::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -93,7 +93,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Account::class, $resource);
     }
 
-    public function testIsRejectable()
+    public function testIsRejectable(): void
     {
         $account = Account::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -105,7 +105,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame($resource, $account);
     }
 
-    public function testIsDeauthorizable()
+    public function testIsDeauthorizable(): void
     {
         $resource = Account::retrieve(self::TEST_RESOURCE_ID);
         $this->stubRequest(
@@ -126,7 +126,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         $resource->deauthorize();
     }
 
-    public function testPersons()
+    public function testPersons(): void
     {
         $account = Account::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -138,7 +138,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Person::class, $persons->data[0]);
     }
 
-    public function testCanRetrieveCapability()
+    public function testCanRetrieveCapability(): void
     {
         $this->expectsRequest(
             'get',
@@ -148,7 +148,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Capability::class, $resource);
     }
 
-    public function testCanUpdateCapability()
+    public function testCanUpdateCapability(): void
     {
         $this->expectsRequest(
             'post',
@@ -160,7 +160,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Capability::class, $resource);
     }
 
-    public function testCanListCapabilities()
+    public function testCanListCapabilities(): void
     {
         $this->expectsRequest(
             'get',
@@ -170,7 +170,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInternalType('array', $resources->data);
     }
 
-    public function testCanCreateExternalAccount()
+    public function testCanCreateExternalAccount(): void
     {
         $this->expectsRequest(
             'post',
@@ -182,7 +182,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\BankAccount::class, $resource);
     }
 
-    public function testCanRetrieveExternalAccount()
+    public function testCanRetrieveExternalAccount(): void
     {
         $this->expectsRequest(
             'get',
@@ -192,7 +192,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\BankAccount::class, $resource);
     }
 
-    public function testCanUpdateExternalAccount()
+    public function testCanUpdateExternalAccount(): void
     {
         $this->expectsRequest(
             'post',
@@ -204,7 +204,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\BankAccount::class, $resource);
     }
 
-    public function testCanDeleteExternalAccount()
+    public function testCanDeleteExternalAccount(): void
     {
         $this->expectsRequest(
             'delete',
@@ -214,7 +214,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($resource->deleted);
     }
 
-    public function testCanListExternalAccounts()
+    public function testCanListExternalAccounts(): void
     {
         $this->expectsRequest(
             'get',
@@ -224,7 +224,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInternalType('array', $resources->data);
     }
 
-    public function testCanCreateLoginLink()
+    public function testCanCreateLoginLink(): void
     {
         $this->expectsRequest(
             'post',
@@ -234,7 +234,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\LoginLink::class, $resource);
     }
 
-    public function testCanCreatePerson()
+    public function testCanCreatePerson(): void
     {
         $this->expectsRequest(
             'post',
@@ -250,7 +250,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Person::class, $resource);
     }
 
-    public function testCanRetrievePerson()
+    public function testCanRetrievePerson(): void
     {
         $this->expectsRequest(
             'get',
@@ -260,7 +260,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Person::class, $resource);
     }
 
-    public function testCanUpdatePerson()
+    public function testCanUpdatePerson(): void
     {
         $this->expectsRequest(
             'post',
@@ -272,7 +272,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Person::class, $resource);
     }
 
-    public function testCanDeletePerson()
+    public function testCanDeletePerson(): void
     {
         $this->expectsRequest(
             'delete',
@@ -282,7 +282,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($resource->deleted);
     }
 
-    public function testCanListPersons()
+    public function testCanListPersons(): void
     {
         $this->expectsRequest(
             'get',
@@ -292,7 +292,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertInternalType('array', $resources->data);
     }
 
-    public function testSerializeNewAdditionalOwners()
+    public function testSerializeNewAdditionalOwners(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'account',
@@ -314,7 +314,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testSerializeAddAdditionalOwners()
+    public function testSerializeAddAdditionalOwners(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'account',
@@ -337,7 +337,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testSerializePartiallyChangedAdditionalOwners()
+    public function testSerializePartiallyChangedAdditionalOwners(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'account',
@@ -360,7 +360,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testSerializeUnchangedAdditionalOwners()
+    public function testSerializeUnchangedAdditionalOwners(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'account',
@@ -380,7 +380,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testSerializeUnsetAdditionalOwners()
+    public function testSerializeUnsetAdditionalOwners(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'account',
@@ -403,7 +403,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testSerializeAdditionalOwnersDeletedItem()
+    public function testSerializeAdditionalOwnersDeletedItem(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -421,7 +421,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         $obj->serializeParameters();
     }
 
-    public function testSerializeExternalAccountString()
+    public function testSerializeExternalAccountString(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'account',
@@ -434,7 +434,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testSerializeExternalAccountHash()
+    public function testSerializeExternalAccountHash(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'account',
@@ -459,7 +459,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testSerializeBankAccountString()
+    public function testSerializeBankAccountString(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'account',
@@ -472,7 +472,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testSerializeBankAccountHash()
+    public function testSerializeBankAccountHash(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'account',
@@ -497,7 +497,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testSerializeNewIndividual()
+    public function testSerializeNewIndividual(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'account',
@@ -508,7 +508,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testSerializePartiallyChangedIndividual()
+    public function testSerializePartiallyChangedIndividual(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'account',
@@ -523,7 +523,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testSerializeUnchangedIndividual()
+    public function testSerializeUnchangedIndividual(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'account',
@@ -537,7 +537,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testSerializeUnsetIndividual()
+    public function testSerializeUnsetIndividual(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'account',

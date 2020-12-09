@@ -17,7 +17,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
     const TEST_TAX_ID_ID = 'txi_123';
     const TEST_CUSTOMER_BALANCE_TRANSACTION_ID = 'cbtxn_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -28,7 +28,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Customer::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -38,7 +38,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Customer::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -48,7 +48,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Customer::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Customer::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -60,7 +60,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Customer::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -72,7 +72,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Customer::class, $resource);
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $resource = Customer::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -83,7 +83,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Customer::class, $resource);
     }
 
-    public function testCanDeleteDiscount()
+    public function testCanDeleteDiscount(): void
     {
         $customer = Customer::retrieve(self::TEST_RESOURCE_ID);
         $this->stubRequest(
@@ -94,7 +94,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         static::assertSame($customer->discount, null);
     }
 
-    public function testCanCreateSource()
+    public function testCanCreateSource(): void
     {
         $this->expectsRequest(
             'post',
@@ -103,7 +103,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         $resource = Customer::createSource(self::TEST_RESOURCE_ID, ['source' => 'btok_123']);
     }
 
-    public function testCanRetrieveSource()
+    public function testCanRetrieveSource(): void
     {
         $this->expectsRequest(
             'get',
@@ -112,7 +112,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         $resource = Customer::retrieveSource(self::TEST_RESOURCE_ID, self::TEST_SOURCE_ID);
     }
 
-    public function testCanUpdateSource()
+    public function testCanUpdateSource(): void
     {
         $this->expectsRequest(
             'post',
@@ -123,7 +123,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Card::class, $resource);
     }
 
-    public function testCanDeleteSource()
+    public function testCanDeleteSource(): void
     {
         $this->expectsRequest(
             'delete',
@@ -132,7 +132,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         $resource = Customer::deleteSource(self::TEST_RESOURCE_ID, self::TEST_SOURCE_ID);
     }
 
-    public function testCanListSources()
+    public function testCanListSources(): void
     {
         $this->expectsRequest(
             'get',
@@ -142,7 +142,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         static::assertInternalType('array', $resources->data);
     }
 
-    public function testSerializeSourceString()
+    public function testSerializeSourceString(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'customer',
@@ -155,7 +155,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testSerializeSourceMap()
+    public function testSerializeSourceMap(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'customer',
@@ -178,7 +178,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->serializeParameters());
     }
 
-    public function testCanCreateTaxId()
+    public function testCanCreateTaxId(): void
     {
         $this->expectsRequest(
             'post',
@@ -190,7 +190,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testCanRetrieveTaxId()
+    public function testCanRetrieveTaxId(): void
     {
         $this->expectsRequest(
             'get',
@@ -199,7 +199,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         $resource = Customer::retrieveTaxId(self::TEST_RESOURCE_ID, self::TEST_TAX_ID_ID);
     }
 
-    public function testCanDeleteTaxId()
+    public function testCanDeleteTaxId(): void
     {
         $this->expectsRequest(
             'delete',
@@ -208,7 +208,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         $resource = Customer::deleteTaxId(self::TEST_RESOURCE_ID, self::TEST_TAX_ID_ID);
     }
 
-    public function testCanListTaxIds()
+    public function testCanListTaxIds(): void
     {
         $this->expectsRequest(
             'get',
@@ -218,7 +218,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         static::assertInternalType('array', $resources->data);
     }
 
-    public function testCanCreateBalanceTransaction()
+    public function testCanCreateBalanceTransaction(): void
     {
         $this->expectsRequest(
             'post',
@@ -230,7 +230,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testCanRetrieveBalanceTransaction()
+    public function testCanRetrieveBalanceTransaction(): void
     {
         $this->expectsRequest(
             'get',
@@ -239,7 +239,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         $resource = Customer::retrieveBalanceTransaction(self::TEST_RESOURCE_ID, self::TEST_CUSTOMER_BALANCE_TRANSACTION_ID);
     }
 
-    public function testCanUpdateBalanceTransaction()
+    public function testCanUpdateBalanceTransaction(): void
     {
         $this->expectsRequest(
             'post',
@@ -248,7 +248,7 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         $resource = Customer::updateBalanceTransaction(self::TEST_RESOURCE_ID, self::TEST_CUSTOMER_BALANCE_TRANSACTION_ID, ['description' => 'new']);
     }
 
-    public function testCanListCustomerBalanceTransactions()
+    public function testCanListCustomerBalanceTransactions(): void
     {
         $this->expectsRequest(
             'get',

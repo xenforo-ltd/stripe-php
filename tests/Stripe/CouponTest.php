@@ -14,7 +14,7 @@ final class CouponTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = '25OFF';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class CouponTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Coupon::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class CouponTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Coupon::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -50,7 +50,7 @@ final class CouponTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Coupon::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Coupon::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -62,7 +62,7 @@ final class CouponTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Coupon::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -74,7 +74,7 @@ final class CouponTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Coupon::class, $resource);
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $resource = Coupon::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

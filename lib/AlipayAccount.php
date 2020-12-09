@@ -47,7 +47,7 @@ class AlipayAccount extends ApiResource
      * @deprecated Alipay accounts are deprecated. Please use the sources API instead.
      * @see https://stripe.com/docs/sources/alipay
      */
-    public static function retrieve($_id, $_opts = null)
+    public static function retrieve($_id, $_opts = null): void
     {
         $msg = 'Alipay accounts cannot be retrieved without a customer ID. ' .
                'Retrieve an Alipay account using `Customer::retrieveSource(' .
@@ -66,7 +66,7 @@ class AlipayAccount extends ApiResource
      * @deprecated Alipay accounts are deprecated. Please use the sources API instead.
      * @see https://stripe.com/docs/sources/alipay
      */
-    public static function update($_id, $_params = null, $_options = null)
+    public static function update($_id, $_params = null, $_options = null): void
     {
         $msg = 'Alipay accounts cannot be updated without a customer ID. ' .
                'Update an Alipay account using `Customer::updateSource(' .

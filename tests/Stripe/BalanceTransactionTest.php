@@ -14,7 +14,7 @@ final class BalanceTransactionTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'txn_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class BalanceTransactionTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\BalanceTransaction::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',

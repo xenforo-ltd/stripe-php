@@ -14,7 +14,7 @@ final class EventTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'evt_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class EventTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Event::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',

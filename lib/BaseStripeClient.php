@@ -210,7 +210,7 @@ class BaseStripeClient implements StripeClientInterface
      *
      * @throws \Stripe\Exception\InvalidArgumentException
      */
-    private function validateConfig($config)
+    private function validateConfig($config): void
     {
         // api_key
         if (null !== $config['api_key'] && !\is_string($config['api_key'])) {

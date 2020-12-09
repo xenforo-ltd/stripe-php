@@ -15,7 +15,7 @@ final class ApplicationFeeRefundTest extends \PHPUnit\Framework\TestCase
     const TEST_RESOURCE_ID = 'fr_123';
     const TEST_FEE_ID = 'fee_123';
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = ApplicationFee::retrieveRefund(self::TEST_FEE_ID, self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';

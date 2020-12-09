@@ -19,19 +19,19 @@ final class CoreServiceFactoryTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->serviceFactory = new CoreServiceFactory($this->client);
     }
 
-    public function testExposesPropertiesForServices()
+    public function testExposesPropertiesForServices(): void
     {
         static::assertInstanceOf(CouponService::class, $this->serviceFactory->coupons);
         static::assertInstanceOf(\Stripe\Service\Issuing\IssuingServiceFactory::class, $this->serviceFactory->issuing);
     }
 
-    public function testMultipleCallsReturnSameInstance()
+    public function testMultipleCallsReturnSameInstance(): void
     {
         $service = $this->serviceFactory->coupons;
         static::assertSame($service, $this->serviceFactory->coupons);

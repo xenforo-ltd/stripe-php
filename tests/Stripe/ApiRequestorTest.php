@@ -14,7 +14,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
 {
     use TestHelper;
 
-    public function testEncodeObjects()
+    public function testEncodeObjects(): void
     {
         $reflector = new \ReflectionClass(\Stripe\ApiRequestor::class);
         $method = $reflector->getMethod('_encodeObjects');
@@ -44,7 +44,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         static::assertSame('false', $enc);
     }
 
-    public function testHttpClientInjection()
+    public function testHttpClientInjection(): void
     {
         $reflector = new \ReflectionClass(\Stripe\ApiRequestor::class);
         $method = $reflector->getMethod('httpClient');
@@ -58,7 +58,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         static::assertSame($injectedCurl, $curl);
     }
 
-    public function testDefaultHeaders()
+    public function testDefaultHeaders(): void
     {
         $reflector = new \ReflectionClass(\Stripe\ApiRequestor::class);
         $method = $reflector->getMethod('_defaultHeaders');
@@ -87,7 +87,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         static::assertSame($headers['Authorization'], 'Bearer ' . $apiKey);
     }
 
-    public function testRaisesAuthenticationErrorWhenNoApiKey()
+    public function testRaisesAuthenticationErrorWhenNoApiKey(): void
     {
         $this->expectException(\Stripe\Exception\AuthenticationException::class);
         $this->expectExceptionMessageRegExp('#No API key provided#');
@@ -96,7 +96,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         Charge::create();
     }
 
-    public function testRaisesInvalidRequestErrorOn400()
+    public function testRaisesInvalidRequestErrorOn400(): void
     {
         $this->stubRequest(
             'POST',
@@ -127,7 +127,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRaisesIdempotencyErrorOn400AndTypeIdempotencyError()
+    public function testRaisesIdempotencyErrorOn400AndTypeIdempotencyError(): void
     {
         $this->stubRequest(
             'POST',
@@ -156,7 +156,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRaisesAuthenticationErrorOn401()
+    public function testRaisesAuthenticationErrorOn401(): void
     {
         $this->stubRequest(
             'POST',
@@ -185,7 +185,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRaisesCardErrorOn402()
+    public function testRaisesCardErrorOn402(): void
     {
         $this->stubRequest(
             'POST',
@@ -221,7 +221,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRaisesPermissionErrorOn403()
+    public function testRaisesPermissionErrorOn403(): void
     {
         $this->stubRequest(
             'GET',
@@ -250,7 +250,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRaisesInvalidRequestErrorOn404()
+    public function testRaisesInvalidRequestErrorOn404(): void
     {
         $this->stubRequest(
             'GET',
@@ -281,7 +281,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRaisesRateLimitErrorOn429()
+    public function testRaisesRateLimitErrorOn429(): void
     {
         $this->stubRequest(
             'POST',
@@ -310,7 +310,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRaisesRateLimitErrorOn400AndCodeRateLimit()
+    public function testRaisesRateLimitErrorOn400AndCodeRateLimit(): void
     {
         $this->stubRequest(
             'POST',
@@ -339,7 +339,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRaisesOAuthInvalidRequestError()
+    public function testRaisesOAuthInvalidRequestError(): void
     {
         $this->stubRequest(
             'POST',
@@ -367,7 +367,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRaisesOAuthInvalidClientError()
+    public function testRaisesOAuthInvalidClientError(): void
     {
         $this->stubRequest(
             'POST',
@@ -395,7 +395,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRaisesOAuthInvalidGrantError()
+    public function testRaisesOAuthInvalidGrantError(): void
     {
         $this->stubRequest(
             'POST',
@@ -423,7 +423,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRaisesOAuthInvalidScopeError()
+    public function testRaisesOAuthInvalidScopeError(): void
     {
         $this->stubRequest(
             'POST',
@@ -451,7 +451,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRaisesOAuthUnsupportedGrantTypeError()
+    public function testRaisesOAuthUnsupportedGrantTypeError(): void
     {
         $this->stubRequest(
             'POST',
@@ -477,7 +477,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRaisesOAuthUnsupportedResponseTypeError()
+    public function testRaisesOAuthUnsupportedResponseTypeError(): void
     {
         $this->stubRequest(
             'POST',
@@ -505,7 +505,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testHeaderStripeVersionGlobal()
+    public function testHeaderStripeVersionGlobal(): void
     {
         Stripe::setApiVersion('2222-22-22');
         $this->stubRequest(
@@ -524,7 +524,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         Charge::create();
     }
 
-    public function testHeaderStripeVersionRequestOptions()
+    public function testHeaderStripeVersionRequestOptions(): void
     {
         $this->stubRequest(
             'POST',
@@ -542,7 +542,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         Charge::create([], ['stripe_version' => '2222-22-22']);
     }
 
-    public function testHeaderStripeAccountGlobal()
+    public function testHeaderStripeAccountGlobal(): void
     {
         Stripe::setAccountId('acct_123');
         $this->stubRequest(
@@ -561,7 +561,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         Charge::create();
     }
 
-    public function testHeaderStripeAccountRequestOptions()
+    public function testHeaderStripeAccountRequestOptions(): void
     {
         $this->stubRequest(
             'POST',
@@ -579,7 +579,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
         Charge::create([], ['stripe_account' => 'acct_123']);
     }
 
-    public function testIsDisabled()
+    public function testIsDisabled(): void
     {
         $reflector = new \ReflectionClass(\Stripe\ApiRequestor::class);
         $method = $reflector->getMethod('_isDisabled');

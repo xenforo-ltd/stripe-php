@@ -15,7 +15,7 @@ final class SubscriptionScheduleTest extends \PHPUnit\Framework\TestCase
     const TEST_RESOURCE_ID = 'sub_sched_123';
     const TEST_REVISION_ID = 'sub_sched_rev_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -26,7 +26,7 @@ final class SubscriptionScheduleTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SubscriptionSchedule::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -36,7 +36,7 @@ final class SubscriptionScheduleTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SubscriptionSchedule::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -54,7 +54,7 @@ final class SubscriptionScheduleTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SubscriptionSchedule::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = SubscriptionSchedule::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -66,7 +66,7 @@ final class SubscriptionScheduleTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SubscriptionSchedule::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -78,7 +78,7 @@ final class SubscriptionScheduleTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SubscriptionSchedule::class, $resource);
     }
 
-    public function testIsCancelable()
+    public function testIsCancelable(): void
     {
         $resource = SubscriptionSchedule::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -90,7 +90,7 @@ final class SubscriptionScheduleTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SubscriptionSchedule::class, $resource);
     }
 
-    public function testIsReleaseable()
+    public function testIsReleaseable(): void
     {
         $resource = SubscriptionSchedule::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

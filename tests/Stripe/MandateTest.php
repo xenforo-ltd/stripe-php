@@ -14,7 +14,7 @@ final class MandateTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'mandate_123';
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',

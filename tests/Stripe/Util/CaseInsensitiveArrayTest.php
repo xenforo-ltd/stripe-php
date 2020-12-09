@@ -12,7 +12,7 @@ final class CaseInsensitiveArrayTest extends \PHPUnit\Framework\TestCase
 {
     use \Stripe\TestHelper;
 
-    public function testArrayAccess()
+    public function testArrayAccess(): void
     {
         $arr = new CaseInsensitiveArray(['One' => '1', 'TWO' => '2']);
 
@@ -31,14 +31,14 @@ final class CaseInsensitiveArrayTest extends \PHPUnit\Framework\TestCase
         static::assertSame('3', $arr['THREE']);
     }
 
-    public function testCount()
+    public function testCount(): void
     {
         $arr = new CaseInsensitiveArray(['One' => '1', 'TWO' => '2']);
 
         static::assertCount(2, $arr);
     }
 
-    public function testIterable()
+    public function testIterable(): void
     {
         $arr = new CaseInsensitiveArray(['One' => '1', 'TWO' => '2']);
 

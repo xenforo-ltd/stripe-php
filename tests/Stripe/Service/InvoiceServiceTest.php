@@ -23,13 +23,13 @@ final class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new InvoiceService($this->client);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $this->expectsRequest(
             'get',
@@ -40,7 +40,7 @@ final class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resources->data[0]);
     }
 
-    public function testAllLines()
+    public function testAllLines(): void
     {
         $this->expectsRequest(
             'get',
@@ -50,7 +50,7 @@ final class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInternalType('array', $resources->data);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->expectsRequest(
             'post',
@@ -62,7 +62,7 @@ final class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $this->expectsRequest(
             'delete',
@@ -72,7 +72,7 @@ final class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testFinalizeInvoice()
+    public function testFinalizeInvoice(): void
     {
         $this->expectsRequest(
             'post',
@@ -82,7 +82,7 @@ final class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testMarkUncollectible()
+    public function testMarkUncollectible(): void
     {
         $this->expectsRequest(
             'post',
@@ -92,7 +92,7 @@ final class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testPay()
+    public function testPay(): void
     {
         $this->expectsRequest(
             'post',
@@ -102,7 +102,7 @@ final class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testRetrieve()
+    public function testRetrieve(): void
     {
         $this->expectsRequest(
             'get',
@@ -112,7 +112,7 @@ final class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testSendInvoice()
+    public function testSendInvoice(): void
     {
         $this->expectsRequest(
             'post',
@@ -122,7 +122,7 @@ final class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testUpcoming()
+    public function testUpcoming(): void
     {
         $this->expectsRequest(
             'get',
@@ -132,7 +132,7 @@ final class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testUpcomingLines()
+    public function testUpcomingLines(): void
     {
         $this->expectsRequest(
             'get',
@@ -143,7 +143,7 @@ final class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\InvoiceLineItem::class, $resources->data[0]);
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $this->expectsRequest(
             'post',
@@ -155,7 +155,7 @@ final class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testVoidInvoice()
+    public function testVoidInvoice(): void
     {
         $this->expectsRequest(
             'post',

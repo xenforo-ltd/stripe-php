@@ -21,7 +21,7 @@ final class StripeObjectTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    public function setUpReflectors()
+    public function setUpReflectors(): void
     {
         // Sets up reflectors needed by some tests to access protected or
         // private attributes.
@@ -35,7 +35,7 @@ final class StripeObjectTest extends \PHPUnit\Framework\TestCase
         $this->optsReflector->setAccessible(true);
     }
 
-    public function testArrayAccessorsSemantics()
+    public function testArrayAccessorsSemantics(): void
     {
         $s = new StripeObject();
         $s['foo'] = 'a';
@@ -45,7 +45,7 @@ final class StripeObjectTest extends \PHPUnit\Framework\TestCase
         static::assertFalse(isset($s['foo']));
     }
 
-    public function testNormalAccessorsSemantics()
+    public function testNormalAccessorsSemantics(): void
     {
         $s = new StripeObject();
         $s->foo = 'a';
@@ -55,7 +55,7 @@ final class StripeObjectTest extends \PHPUnit\Framework\TestCase
         static::assertFalse(isset($s->foo));
     }
 
-    public function testArrayAccessorsMatchNormalAccessors()
+    public function testArrayAccessorsMatchNormalAccessors(): void
     {
         $s = new StripeObject();
         $s->foo = 'a';
@@ -65,7 +65,7 @@ final class StripeObjectTest extends \PHPUnit\Framework\TestCase
         static::assertSame($s->bar, 'b');
     }
 
-    public function testCount()
+    public function testCount(): void
     {
         $s = new StripeObject();
         static::assertCount(0, $s);
@@ -80,21 +80,21 @@ final class StripeObjectTest extends \PHPUnit\Framework\TestCase
         static::assertCount(1, $s);
     }
 
-    public function testKeys()
+    public function testKeys(): void
     {
         $s = new StripeObject();
         $s->foo = 'bar';
         static::assertSame($s->keys(), ['foo']);
     }
 
-    public function testValues()
+    public function testValues(): void
     {
         $s = new StripeObject();
         $s->foo = 'bar';
         static::assertSame($s->values(), ['bar']);
     }
 
-    public function testToArray()
+    public function testToArray(): void
     {
         $array = [
             'foo' => 'a',
@@ -113,7 +113,7 @@ final class StripeObjectTest extends \PHPUnit\Framework\TestCase
         static::assertSame($array, $converted);
     }
 
-    public function testToArrayRecursive()
+    public function testToArrayRecursive(): void
     {
         // deep nested associative array (when contained in an indexed array)
         // or StripeObject
@@ -137,7 +137,7 @@ final class StripeObjectTest extends \PHPUnit\Framework\TestCase
         static::assertSame($expected, $obj->toArray());
     }
 
-    public function testNonexistentProperty()
+    public function testNonexistentProperty(): void
     {
         $capture = \tmpfile();
         $origErrorLog = \ini_set('error_log', \stream_get_meta_data($capture)['uri']);
@@ -156,13 +156,13 @@ final class StripeObjectTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testPropertyDoesNotExists()
+    public function testPropertyDoesNotExists(): void
     {
         $s = new StripeObject();
         static::assertNull($s['nonexistent']);
     }
 
-    public function testJsonEncode()
+    public function testJsonEncode(): void
     {
         $s = new StripeObject();
         $s->foo = 'a';
@@ -170,7 +170,7 @@ final class StripeObjectTest extends \PHPUnit\Framework\TestCase
         static::assertSame('{"foo":"a"}', \json_encode($s));
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $s = new StripeObject();
         $s->foo = 'a';
@@ -184,7 +184,7 @@ EOS;
         static::assertSame($expected, $string);
     }
 
-    public function testReplaceNewNestedUpdatable()
+    public function testReplaceNewNestedUpdatable(): void
     {
         $s = new StripeObject();
 
@@ -194,7 +194,7 @@ EOS;
         static::assertSame($s->metadata, ['baz', 'qux']);
     }
 
-    public function testSetPermanentAttribute()
+    public function testSetPermanentAttribute(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -202,7 +202,7 @@ EOS;
         $s->id = 'abc_123';
     }
 
-    public function testSetEmptyStringValue()
+    public function testSetEmptyStringValue(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -210,27 +210,27 @@ EOS;
         $s->foo = '';
     }
 
-    public function testSerializeParametersOnEmptyObject()
+    public function testSerializeParametersOnEmptyObject(): void
     {
         $obj = StripeObject::constructFrom([]);
         static::assertSame([], $obj->serializeParameters());
     }
 
-    public function testSerializeParametersOnNewObjectWithSubObject()
+    public function testSerializeParametersOnNewObjectWithSubObject(): void
     {
         $obj = new StripeObject();
         $obj->metadata = ['foo' => 'bar'];
         static::assertSame(['metadata' => ['foo' => 'bar']], $obj->serializeParameters());
     }
 
-    public function testSerializeParametersOnBasicObject()
+    public function testSerializeParametersOnBasicObject(): void
     {
         $obj = StripeObject::constructFrom(['foo' => null]);
         $obj->updateAttributes(['foo' => 'bar']);
         static::assertSame(['foo' => 'bar'], $obj->serializeParameters());
     }
 
-    public function testSerializeParametersOnMoreComplexObject()
+    public function testSerializeParametersOnMoreComplexObject(): void
     {
         $obj = StripeObject::constructFrom([
             'foo' => StripeObject::constructFrom([
@@ -242,7 +242,7 @@ EOS;
         static::assertSame(['foo' => ['bar' => 'newbar']], $obj->serializeParameters());
     }
 
-    public function testSerializeParametersOnArray()
+    public function testSerializeParametersOnArray(): void
     {
         $obj = StripeObject::constructFrom([
             'foo' => null,
@@ -251,7 +251,7 @@ EOS;
         static::assertSame(['foo' => ['new-value']], $obj->serializeParameters());
     }
 
-    public function testSerializeParametersOnArrayThatShortens()
+    public function testSerializeParametersOnArrayThatShortens(): void
     {
         $obj = StripeObject::constructFrom([
             'foo' => ['0-index', '1-index', '2-index'],
@@ -260,7 +260,7 @@ EOS;
         static::assertSame(['foo' => ['new-value']], $obj->serializeParameters());
     }
 
-    public function testSerializeParametersOnArrayThatLengthens()
+    public function testSerializeParametersOnArrayThatLengthens(): void
     {
         $obj = StripeObject::constructFrom([
             'foo' => ['0-index', '1-index', '2-index'],
@@ -269,7 +269,7 @@ EOS;
         static::assertSame(['foo' => \array_fill(0, 4, 'new-value')], $obj->serializeParameters());
     }
 
-    public function testSerializeParametersOnArrayOfHashes()
+    public function testSerializeParametersOnArrayOfHashes(): void
     {
         $obj = StripeObject::constructFrom(['foo' => null]);
         $obj->foo = [
@@ -280,7 +280,7 @@ EOS;
         static::assertSame(['foo' => [['bar' => 'baz']]], $obj->serializeParameters());
     }
 
-    public function testSerializeParametersDoesNotIncludeUnchangedValues()
+    public function testSerializeParametersDoesNotIncludeUnchangedValues(): void
     {
         $obj = StripeObject::constructFrom([
             'foo' => null,
@@ -288,7 +288,7 @@ EOS;
         static::assertSame([], $obj->serializeParameters());
     }
 
-    public function testSerializeParametersOnUnchangedArray()
+    public function testSerializeParametersOnUnchangedArray(): void
     {
         $obj = StripeObject::constructFrom([
             'foo' => ['0-index', '1-index', '2-index'],
@@ -297,7 +297,7 @@ EOS;
         static::assertSame([], $obj->serializeParameters());
     }
 
-    public function testSerializeParametersWithStripeObject()
+    public function testSerializeParametersWithStripeObject(): void
     {
         $obj = StripeObject::constructFrom([]);
         $obj->metadata = StripeObject::constructFrom(['foo' => 'bar']);
@@ -306,7 +306,7 @@ EOS;
         static::assertSame(['foo' => 'bar'], $serialized['metadata']);
     }
 
-    public function testSerializeParametersOnReplacedStripeObject()
+    public function testSerializeParametersOnReplacedStripeObject(): void
     {
         $obj = StripeObject::constructFrom([
             'source' => StripeObject::constructFrom(['bar' => 'foo']),
@@ -317,7 +317,7 @@ EOS;
         static::assertSame(['baz' => 'foo'], $serialized['source']);
     }
 
-    public function testSerializeParametersOnReplacedStripeObjectWhichIsMetadata()
+    public function testSerializeParametersOnReplacedStripeObjectWhichIsMetadata(): void
     {
         $obj = StripeObject::constructFrom([
             'metadata' => StripeObject::constructFrom(['bar' => 'foo']),
@@ -328,7 +328,7 @@ EOS;
         static::assertSame(['bar' => '', 'baz' => 'foo'], $serialized['metadata']);
     }
 
-    public function testSerializeParametersOnArrayOfStripeObjects()
+    public function testSerializeParametersOnArrayOfStripeObjects(): void
     {
         $obj = StripeObject::constructFrom([]);
         $obj->metadata = [
@@ -339,7 +339,7 @@ EOS;
         static::assertSame([['foo' => 'bar']], $serialized['metadata']);
     }
 
-    public function testSerializeParametersOnSetApiResource()
+    public function testSerializeParametersOnSetApiResource(): void
     {
         $customer = Customer::constructFrom(['id' => 'cus_123']);
         $obj = StripeObject::constructFrom([]);
@@ -352,7 +352,7 @@ EOS;
         static::assertSame(['customer' => $customer], $serialized);
     }
 
-    public function testSerializeParametersOnNotSetApiResource()
+    public function testSerializeParametersOnNotSetApiResource(): void
     {
         $customer = Customer::constructFrom(['id' => 'cus_123']);
         $obj = StripeObject::constructFrom(['customer' => $customer]);
@@ -361,7 +361,7 @@ EOS;
         static::assertSame([], $serialized);
     }
 
-    public function testSerializeParametersOnApiResourceFlaggedWithSaveWithParent()
+    public function testSerializeParametersOnApiResourceFlaggedWithSaveWithParent(): void
     {
         $customer = Customer::constructFrom(['id' => 'cus_123']);
         $customer->saveWithParent = true;
@@ -372,7 +372,7 @@ EOS;
         static::assertSame(['customer' => []], $serialized);
     }
 
-    public function testSerializeParametersRaisesExceotionOnOtherEmbeddedApiResources()
+    public function testSerializeParametersRaisesExceotionOnOtherEmbeddedApiResources(): void
     {
         // This customer doesn't have an ID and therefore the library doesn't know
         // what to do with it and throws an InvalidArgumentException because it's
@@ -396,7 +396,7 @@ EOS;
         }
     }
 
-    public function testSerializeParametersForce()
+    public function testSerializeParametersForce(): void
     {
         $obj = StripeObject::constructFrom([
             'id' => 'id',
@@ -409,7 +409,7 @@ EOS;
         static::assertSame(['id' => 'id', 'metadata' => ['bar' => 'foo']], $serialized);
     }
 
-    public function testDirty()
+    public function testDirty(): void
     {
         $obj = StripeObject::constructFrom([
             'id' => 'id',
@@ -426,7 +426,7 @@ EOS;
         static::assertSame(['id' => 'id', 'metadata' => ['bar' => 'foo']], $serialized);
     }
 
-    public function testDeepCopy()
+    public function testDeepCopy(): void
     {
         $opts = [
             'api_base' => Stripe::$apiBase,
@@ -494,14 +494,14 @@ EOS;
         static::assertSame($values['map']['2'], $copyValues['map']['2']);
     }
 
-    public function testDeepCopyMaintainClass()
+    public function testDeepCopyMaintainClass(): void
     {
         $charge = Charge::constructFrom(['id' => 1], null);
         $copyCharge = $this->deepCopyReflector->invoke(null, $charge);
         static::assertSame(\get_class($charge), \get_class($copyCharge));
     }
 
-    public function testIsDeleted()
+    public function testIsDeleted(): void
     {
         $obj = StripeObject::constructFrom([]);
         static::assertFalse($obj->isDeleted());
@@ -513,7 +513,7 @@ EOS;
         static::assertTrue($obj->isDeleted());
     }
 
-    public function testDeserializeEmptyMetadata()
+    public function testDeserializeEmptyMetadata(): void
     {
         $obj = StripeObject::constructFrom([
             'metadata' => [],
@@ -522,7 +522,7 @@ EOS;
         static::assertInstanceOf(\Stripe\StripeObject::class, $obj->metadata);
     }
 
-    public function testDeserializeMetadataWithKeyNamedMetadata()
+    public function testDeserializeMetadataWithKeyNamedMetadata(): void
     {
         $obj = StripeObject::constructFrom([
             'metadata' => ['metadata' => 'value'],

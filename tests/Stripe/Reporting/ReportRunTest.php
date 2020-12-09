@@ -14,7 +14,7 @@ final class ReportRunTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'frr_123';
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $params = [
             'parameters' => [
@@ -32,7 +32,7 @@ final class ReportRunTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Reporting\ReportRun::class, $resource);
     }
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -43,7 +43,7 @@ final class ReportRunTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Reporting\ReportRun::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',

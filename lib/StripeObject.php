@@ -129,7 +129,7 @@ class StripeObject implements \ArrayAccess, \Countable, \JsonSerializable
     }
 
     // Standard accessor magic methods
-    public function __set($k, $v)
+    public function __set($k, $v): void
     {
         if (static::getPermanentAttributes()->includes($k)) {
             throw new Exception\InvalidArgumentException(
@@ -156,7 +156,7 @@ class StripeObject implements \ArrayAccess, \Countable, \JsonSerializable
         return isset($this->_values[$k]);
     }
 
-    public function __unset($k)
+    public function __unset($k): void
     {
         unset($this->_values[$k]);
         $this->_transientValues->add($k);
@@ -196,7 +196,7 @@ class StripeObject implements \ArrayAccess, \Countable, \JsonSerializable
     }
 
     // ArrayAccess methods
-    public function offsetSet($k, $v)
+    public function offsetSet($k, $v): void
     {
         $this->{$k} = $v;
     }
@@ -206,7 +206,7 @@ class StripeObject implements \ArrayAccess, \Countable, \JsonSerializable
         return \array_key_exists($k, $this->_values);
     }
 
-    public function offsetUnset($k)
+    public function offsetUnset($k): void
     {
         unset($this->{$k});
     }
@@ -255,7 +255,7 @@ class StripeObject implements \ArrayAccess, \Countable, \JsonSerializable
      * @param null|array|string|Util\RequestOptions $opts
      * @param bool $partial defaults to false
      */
-    public function refreshFrom($values, $opts, $partial = false)
+    public function refreshFrom($values, $opts, $partial = false): void
     {
         $this->_opts = Util\RequestOptions::parse($opts);
 
@@ -292,7 +292,7 @@ class StripeObject implements \ArrayAccess, \Countable, \JsonSerializable
      * @param null|array|string|Util\RequestOptions $opts
      * @param bool $dirty defaults to true
      */
-    public function updateAttributes($values, $opts = null, $dirty = true)
+    public function updateAttributes($values, $opts = null, $dirty = true): void
     {
         foreach ($values as $k => $v) {
             // Special-case metadata to always be cast as a StripeObject
@@ -480,7 +480,7 @@ class StripeObject implements \ArrayAccess, \Countable, \JsonSerializable
      * method is also recursive, so any StripeObjects contained as values or
      * which are values in a tenant array are also marked as dirty.
      */
-    public function dirty()
+    public function dirty(): void
     {
         $this->_unsavedValues = new Util\Set(\array_keys($this->_values));
         foreach ($this->_values as $k => $v) {
@@ -488,7 +488,7 @@ class StripeObject implements \ArrayAccess, \Countable, \JsonSerializable
         }
     }
 
-    protected function dirtyValue($value)
+    protected function dirtyValue($value): void
     {
         if (\is_array($value)) {
             foreach ($value as $v) {
@@ -559,7 +559,7 @@ class StripeObject implements \ArrayAccess, \Countable, \JsonSerializable
      *
      * @param ApiResponse $resp
      */
-    public function setLastResponse($resp)
+    public function setLastResponse($resp): void
     {
         $this->_lastResponse = $resp;
     }

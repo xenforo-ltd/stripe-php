@@ -14,7 +14,7 @@ final class ReviewTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'prv_123';
 
-    public function testIsApprovable()
+    public function testIsApprovable(): void
     {
         $resource = Review::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -25,7 +25,7 @@ final class ReviewTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Review::class, $resource);
     }
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -36,7 +36,7 @@ final class ReviewTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Review::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',

@@ -23,13 +23,13 @@ final class StripeTelemetryTest extends \PHPUnit\Framework\TestCase
       "url": "/v1/accounts"
     }';
 
-    protected function setUp()
+    protected function setUp(): void
     {
         // clear static telemetry data
         ApiRequestor::resetTelemetry();
     }
 
-    public function testNoTelemetrySentIfNotEnabled()
+    public function testNoTelemetrySentIfNotEnabled(): void
     {
         $requestheaders = null;
 
@@ -70,7 +70,7 @@ final class StripeTelemetryTest extends \PHPUnit\Framework\TestCase
         ApiRequestor::setHttpClient(null);
     }
 
-    public function testTelemetrySetIfEnabled()
+    public function testTelemetrySetIfEnabled(): void
     {
         Stripe::setEnableTelemetry(true);
 

@@ -15,7 +15,7 @@ final class TransferTest extends \PHPUnit\Framework\TestCase
     const TEST_RESOURCE_ID = 'tr_123';
     const TEST_REVERSAL_ID = 'trr_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -26,7 +26,7 @@ final class TransferTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Transfer::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -36,7 +36,7 @@ final class TransferTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Transfer::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -50,7 +50,7 @@ final class TransferTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Transfer::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Transfer::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -62,7 +62,7 @@ final class TransferTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Transfer::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -74,7 +74,7 @@ final class TransferTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Transfer::class, $resource);
     }
 
-    public function testIsCancelable()
+    public function testIsCancelable(): void
     {
         $transfer = Transfer::retrieve(self::TEST_RESOURCE_ID);
 
@@ -88,7 +88,7 @@ final class TransferTest extends \PHPUnit\Framework\TestCase
         static::assertSame($resource, $transfer);
     }
 
-    public function testCanCreateReversal()
+    public function testCanCreateReversal(): void
     {
         $this->expectsRequest(
             'post',
@@ -98,7 +98,7 @@ final class TransferTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\TransferReversal::class, $resource);
     }
 
-    public function testCanRetrieveReversal()
+    public function testCanRetrieveReversal(): void
     {
         $this->expectsRequest(
             'get',
@@ -108,7 +108,7 @@ final class TransferTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\TransferReversal::class, $resource);
     }
 
-    public function testCanUpdateReversal()
+    public function testCanUpdateReversal(): void
     {
         $this->expectsRequest(
             'post',
@@ -124,7 +124,7 @@ final class TransferTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\TransferReversal::class, $resource);
     }
 
-    public function testCanListReversal()
+    public function testCanListReversal(): void
     {
         $this->expectsRequest(
             'get',

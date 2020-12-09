@@ -16,7 +16,7 @@ class DefaultLogger implements LoggerInterface
     /** @var null|string */
     public $destination;
 
-    public function error($message, array $context = [])
+    public function error($message, array $context = []): void
     {
         if (\count($context) > 0) {
             throw new \Stripe\Exception\BadMethodCallException('DefaultLogger does not currently implement context. Please implement if you need it.');

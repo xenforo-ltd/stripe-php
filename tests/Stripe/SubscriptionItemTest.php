@@ -14,7 +14,7 @@ final class SubscriptionItemTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'si_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -30,7 +30,7 @@ final class SubscriptionItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SubscriptionItem::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -40,7 +40,7 @@ final class SubscriptionItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SubscriptionItem::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -53,7 +53,7 @@ final class SubscriptionItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SubscriptionItem::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = SubscriptionItem::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -65,7 +65,7 @@ final class SubscriptionItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SubscriptionItem::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -77,7 +77,7 @@ final class SubscriptionItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SubscriptionItem::class, $resource);
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $resource = SubscriptionItem::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -88,7 +88,7 @@ final class SubscriptionItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SubscriptionItem::class, $resource);
     }
 
-    public function testCanCreateUsageRecord()
+    public function testCanCreateUsageRecord(): void
     {
         $this->expectsRequest(
             'post',
@@ -101,7 +101,7 @@ final class SubscriptionItemTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testCanListUsageRecordSummariesDeprecated()
+    public function testCanListUsageRecordSummariesDeprecated(): void
     {
         $resource = SubscriptionItem::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -113,7 +113,7 @@ final class SubscriptionItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\UsageRecordSummary::class, $resources->data[0]);
     }
 
-    public function testCanListUsageRecordSummaries()
+    public function testCanListUsageRecordSummaries(): void
     {
         $this->expectsRequest(
             'get',

@@ -10,7 +10,7 @@ namespace Stripe;
  */
 final class StripeClientTest extends \PHPUnit\Framework\TestCase
 {
-    public function testExposesPropertiesForServices()
+    public function testExposesPropertiesForServices(): void
     {
         $client = new StripeClient('sk_test_123');
         static::assertInstanceOf(\Stripe\Service\CouponService::class, $client->coupons);

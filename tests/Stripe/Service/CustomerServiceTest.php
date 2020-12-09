@@ -26,13 +26,13 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new CustomerService($this->client);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $this->expectsRequest(
             'get',
@@ -43,7 +43,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Customer::class, $resources->data[0]);
     }
 
-    public function testAllBalanceTransactions()
+    public function testAllBalanceTransactions(): void
     {
         $this->expectsRequest(
             'get',
@@ -54,7 +54,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CustomerBalanceTransaction::class, $resources->data[0]);
     }
 
-    public function testAllSources()
+    public function testAllSources(): void
     {
         $this->expectsRequest(
             'get',
@@ -65,7 +65,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\AlipayAccount::class, $resources->data[0]);
     }
 
-    public function testAllTaxIds()
+    public function testAllTaxIds(): void
     {
         $this->expectsRequest(
             'get',
@@ -76,7 +76,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\TaxId::class, $resources->data[0]);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->expectsRequest(
             'post',
@@ -86,7 +86,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Customer::class, $resource);
     }
 
-    public function testCreateBalanceTransaction()
+    public function testCreateBalanceTransaction(): void
     {
         $this->expectsRequest(
             'post',
@@ -99,7 +99,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CustomerBalanceTransaction::class, $resource);
     }
 
-    public function testCreateSource()
+    public function testCreateSource(): void
     {
         $this->expectsRequest(
             'post',
@@ -108,7 +108,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         $resource = $this->service->createSource(self::TEST_RESOURCE_ID, ['source' => 'tok_123']);
     }
 
-    public function testCreateTaxId()
+    public function testCreateTaxId(): void
     {
         $this->expectsRequest(
             'post',
@@ -121,7 +121,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\TaxId::class, $resource);
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $this->expectsRequest(
             'delete',
@@ -132,7 +132,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($resource->isDeleted());
     }
 
-    public function testDeleteDiscount()
+    public function testDeleteDiscount(): void
     {
         $this->expectsRequest(
             'delete',
@@ -143,7 +143,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($resource->isDeleted());
     }
 
-    public function testDeleteSource()
+    public function testDeleteSource(): void
     {
         $this->expectsRequest(
             'delete',
@@ -152,7 +152,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         $resource = $this->service->deleteSource(self::TEST_RESOURCE_ID, self::TEST_SOURCE_ID);
     }
 
-    public function testDeleteTaxId()
+    public function testDeleteTaxId(): void
     {
         $this->expectsRequest(
             'delete',
@@ -163,7 +163,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($resource->isDeleted());
     }
 
-    public function testRetrieve()
+    public function testRetrieve(): void
     {
         $this->expectsRequest(
             'get',
@@ -173,7 +173,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Customer::class, $resource);
     }
 
-    public function testRetrieveBalanceTransaction()
+    public function testRetrieveBalanceTransaction(): void
     {
         $this->expectsRequest(
             'get',
@@ -187,7 +187,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CustomerBalanceTransaction::class, $resource);
     }
 
-    public function testRetrieveSource()
+    public function testRetrieveSource(): void
     {
         $this->expectsRequest(
             'get',
@@ -196,7 +196,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         $resource = $this->service->retrieveSource(self::TEST_RESOURCE_ID, self::TEST_SOURCE_ID);
     }
 
-    public function testRetrieveTaxId()
+    public function testRetrieveTaxId(): void
     {
         $this->expectsRequest(
             'get',
@@ -206,7 +206,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\TaxId::class, $resource);
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $this->expectsRequest(
             'post',
@@ -218,7 +218,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Customer::class, $resource);
     }
 
-    public function testUpdateBalanceTransaction()
+    public function testUpdateBalanceTransaction(): void
     {
         $this->expectsRequest(
             'post',
@@ -233,7 +233,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CustomerBalanceTransaction::class, $resource);
     }
 
-    public function testUpdateSource()
+    public function testUpdateSource(): void
     {
         $this->expectsRequest(
             'post',
@@ -242,7 +242,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         $resource = $this->service->updateSource(self::TEST_RESOURCE_ID, self::TEST_SOURCE_ID, ['name' => 'name']);
     }
 
-    public function testVerifySource()
+    public function testVerifySource(): void
     {
         $this->expectsRequest(
             'post',

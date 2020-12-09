@@ -14,7 +14,7 @@ final class ProductTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'prod_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class ProductTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Product::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class ProductTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Product::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -47,7 +47,7 @@ final class ProductTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Product::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Product::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -59,7 +59,7 @@ final class ProductTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Product::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -71,7 +71,7 @@ final class ProductTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Product::class, $resource);
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $resource = Product::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

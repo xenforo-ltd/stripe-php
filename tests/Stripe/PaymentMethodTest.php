@@ -14,7 +14,7 @@ final class PaymentMethodTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'pm_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -28,7 +28,7 @@ final class PaymentMethodTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentMethod::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -38,7 +38,7 @@ final class PaymentMethodTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentMethod::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -50,7 +50,7 @@ final class PaymentMethodTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentMethod::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = PaymentMethod::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -62,7 +62,7 @@ final class PaymentMethodTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentMethod::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -74,7 +74,7 @@ final class PaymentMethodTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentMethod::class, $resource);
     }
 
-    public function testCanAttach()
+    public function testCanAttach(): void
     {
         $resource = PaymentMethod::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -88,7 +88,7 @@ final class PaymentMethodTest extends \PHPUnit\Framework\TestCase
         static::assertSame($resource, $resource);
     }
 
-    public function testCanDetach()
+    public function testCanDetach(): void
     {
         $resource = PaymentMethod::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

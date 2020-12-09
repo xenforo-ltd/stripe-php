@@ -24,13 +24,13 @@ final class ApplicationFeeServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new ApplicationFeeService($this->client);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $this->expectsRequest(
             'get',
@@ -41,7 +41,7 @@ final class ApplicationFeeServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\ApplicationFee::class, $resources->data[0]);
     }
 
-    public function testAllRefunds()
+    public function testAllRefunds(): void
     {
         $this->expectsRequest(
             'get',
@@ -52,7 +52,7 @@ final class ApplicationFeeServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\ApplicationFeeRefund::class, $resources->data[0]);
     }
 
-    public function testCreateRefund()
+    public function testCreateRefund(): void
     {
         $this->expectsRequest(
             'post',
@@ -62,7 +62,7 @@ final class ApplicationFeeServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\ApplicationFeeRefund::class, $resource);
     }
 
-    public function testRetrieve()
+    public function testRetrieve(): void
     {
         $this->expectsRequest(
             'get',
@@ -72,7 +72,7 @@ final class ApplicationFeeServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\ApplicationFee::class, $resource);
     }
 
-    public function testRetrieveRefund()
+    public function testRetrieveRefund(): void
     {
         $this->expectsRequest(
             'get',
@@ -82,7 +82,7 @@ final class ApplicationFeeServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\ApplicationFeeRefund::class, $resource);
     }
 
-    public function testUpdateRefund()
+    public function testUpdateRefund(): void
     {
         $this->expectsRequest(
             'post',

@@ -14,7 +14,7 @@ final class DisputeTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'idp_123';
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $params = [
             'transaction' => 'ipi_123',
@@ -29,7 +29,7 @@ final class DisputeTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Dispute::class, $resource);
     }
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -40,7 +40,7 @@ final class DisputeTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Dispute::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -50,7 +50,7 @@ final class DisputeTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Dispute::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -61,7 +61,7 @@ final class DisputeTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Dispute::class, $resource);
     }
 
-    public function testIsSubmittable()
+    public function testIsSubmittable(): void
     {
         $resource = Dispute::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

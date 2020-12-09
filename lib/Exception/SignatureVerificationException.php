@@ -49,7 +49,7 @@ class SignatureVerificationException extends \Exception implements ExceptionInte
      *
      * @param null|string $httpBody
      */
-    public function setHttpBody($httpBody)
+    public function setHttpBody($httpBody): void
     {
         $this->httpBody = $httpBody;
     }
@@ -69,7 +69,7 @@ class SignatureVerificationException extends \Exception implements ExceptionInte
      *
      * @param null|string $sigHeader
      */
-    public function setSigHeader($sigHeader)
+    public function setSigHeader($sigHeader): void
     {
         $this->sigHeader = $sigHeader;
     }

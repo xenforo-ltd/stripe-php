@@ -30,7 +30,7 @@ final class BitcoinReceiverTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testHasCorrectStandaloneUrl()
+    public function testHasCorrectStandaloneUrl(): void
     {
         $resource = $this->createFixture();
         static::assertSame(
@@ -39,7 +39,7 @@ final class BitcoinReceiverTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testHasCorrectUrlForCustomer()
+    public function testHasCorrectUrlForCustomer(): void
     {
         $resource = $this->createFixture(['customer' => 'cus_123']);
         static::assertSame(
@@ -48,7 +48,7 @@ final class BitcoinReceiverTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -59,7 +59,7 @@ final class BitcoinReceiverTest extends \PHPUnit\Framework\TestCase
         static::assertSame(\Stripe\BitcoinReceiver::class, \get_class($resources->data[0]));
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',

@@ -14,7 +14,7 @@ final class CardTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'ic_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class CardTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Card::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class CardTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Card::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Card::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -48,7 +48,7 @@ final class CardTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Card::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -61,7 +61,7 @@ final class CardTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Card::class, $resource);
     }
 
-    public function testCanRetrieveDetails()
+    public function testCanRetrieveDetails(): void
     {
         $resource = Card::retrieve(self::TEST_RESOURCE_ID);
 

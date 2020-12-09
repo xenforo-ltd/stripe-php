@@ -23,13 +23,13 @@ final class EphemeralKeyServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new EphemeralKeyService($this->client);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->expectsRequest(
             'post',
@@ -43,7 +43,7 @@ final class EphemeralKeyServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\EphemeralKey::class, $resource);
     }
 
-    public function testCreateWithoutExplicitApiVersion()
+    public function testCreateWithoutExplicitApiVersion(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -52,7 +52,7 @@ final class EphemeralKeyServiceTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $this->expectsRequest(
             'delete',

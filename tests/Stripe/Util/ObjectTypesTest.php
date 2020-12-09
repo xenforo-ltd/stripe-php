@@ -12,7 +12,7 @@ final class ObjectTypesTest extends \PHPUnit\Framework\TestCase
 {
     use \Stripe\TestHelper;
 
-    public function testMapping()
+    public function testMapping(): void
     {
         static::assertSame(\Stripe\Util\ObjectTypes::mapping['charge'], \Stripe\Charge::class);
         static::assertSame(\Stripe\Util\ObjectTypes::mapping['checkout.session'], \Stripe\Checkout\Session::class);

@@ -12,7 +12,7 @@ final class EphemeralKeyTest extends \PHPUnit\Framework\TestCase
 {
     use TestHelper;
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -26,7 +26,7 @@ final class EphemeralKeyTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\EphemeralKey::class, $resource);
     }
 
-    public function testIsNotCreatableWithoutAnExplicitApiVersion()
+    public function testIsNotCreatableWithoutAnExplicitApiVersion(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -35,7 +35,7 @@ final class EphemeralKeyTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $key = EphemeralKey::create([
             'customer' => 'cus_123',

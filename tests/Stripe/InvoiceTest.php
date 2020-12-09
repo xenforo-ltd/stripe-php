@@ -15,7 +15,7 @@ final class InvoiceTest extends \PHPUnit\Framework\TestCase
     const TEST_RESOURCE_ID = 'in_123';
     const TEST_LINE_ID = 'ii_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -26,7 +26,7 @@ final class InvoiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -36,7 +36,7 @@ final class InvoiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -48,7 +48,7 @@ final class InvoiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Invoice::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -60,7 +60,7 @@ final class InvoiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -72,7 +72,7 @@ final class InvoiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $resource = Invoice::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -83,7 +83,7 @@ final class InvoiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testCanFinalizeInvoice()
+    public function testCanFinalizeInvoice(): void
     {
         $invoice = Invoice::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -95,7 +95,7 @@ final class InvoiceTest extends \PHPUnit\Framework\TestCase
         static::assertSame($resource, $invoice);
     }
 
-    public function testCanMarkUncollectible()
+    public function testCanMarkUncollectible(): void
     {
         $invoice = Invoice::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -107,7 +107,7 @@ final class InvoiceTest extends \PHPUnit\Framework\TestCase
         static::assertSame($resource, $invoice);
     }
 
-    public function testCanPay()
+    public function testCanPay(): void
     {
         $invoice = Invoice::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -119,7 +119,7 @@ final class InvoiceTest extends \PHPUnit\Framework\TestCase
         static::assertSame($resource, $invoice);
     }
 
-    public function testCanRetrieveUpcoming()
+    public function testCanRetrieveUpcoming(): void
     {
         $this->expectsRequest(
             'get',
@@ -129,7 +129,7 @@ final class InvoiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Invoice::class, $resource);
     }
 
-    public function testCanSendInvoice()
+    public function testCanSendInvoice(): void
     {
         $invoice = Invoice::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -141,7 +141,7 @@ final class InvoiceTest extends \PHPUnit\Framework\TestCase
         static::assertSame($resource, $invoice);
     }
 
-    public function testCanVoidInvoice()
+    public function testCanVoidInvoice(): void
     {
         $invoice = Invoice::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -153,7 +153,7 @@ final class InvoiceTest extends \PHPUnit\Framework\TestCase
         static::assertSame($resource, $invoice);
     }
 
-    public function testCanListLines()
+    public function testCanListLines(): void
     {
         $this->expectsRequest(
             'get',

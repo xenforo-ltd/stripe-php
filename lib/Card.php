@@ -114,7 +114,7 @@ class Card extends ApiResource
      *
      * @throws \Stripe\Exception\BadMethodCallException
      */
-    public static function retrieve($_id, $_opts = null)
+    public static function retrieve($_id, $_opts = null): void
     {
         $msg = 'Cards cannot be retrieved without a customer ID or an ' .
                'account ID. Retrieve a card using ' .
@@ -131,7 +131,7 @@ class Card extends ApiResource
      *
      * @throws \Stripe\Exception\BadMethodCallException
      */
-    public static function update($_id, $_params = null, $_options = null)
+    public static function update($_id, $_params = null, $_options = null): void
     {
         $msg = 'Cards cannot be updated without a customer ID or an ' .
                'account ID. Update a card using ' .

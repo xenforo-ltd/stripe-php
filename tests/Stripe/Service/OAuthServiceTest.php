@@ -18,19 +18,19 @@ final class OAuthServiceTest extends \PHPUnit\Framework\TestCase
     /** @var OAuthService */
     private $service;
 
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL, 'client_id' => 'ca_123']);
         $this->service = new OAuthService($this->client);
     }
 
-    protected function setUpServiceWithNoClientId()
+    protected function setUpServiceWithNoClientId(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new OAuthService($this->client);
     }
 
-    public function testAuthorizeUrl()
+    public function testAuthorizeUrl(): void
     {
         $this->setUpService();
         $uriStr = $this->service->authorizeUrl([
@@ -57,7 +57,7 @@ final class OAuthServiceTest extends \PHPUnit\Framework\TestCase
         static::assertSame('US', $params['stripe_user']['country']);
     }
 
-    public function testAuthorizeUrlRaisesAuthenticationErrorWhenNoClientId()
+    public function testAuthorizeUrlRaisesAuthenticationErrorWhenNoClientId(): void
     {
         $this->setUpServiceWithNoClientId();
         $this->expectException(\Stripe\Exception\AuthenticationException::class);
@@ -65,7 +65,7 @@ final class OAuthServiceTest extends \PHPUnit\Framework\TestCase
         $uriStr = $this->service->authorizeUrl();
     }
 
-    public function testAuthorizeUrlRaisesInvalidArgumentExceptionWhenConnectBase()
+    public function testAuthorizeUrlRaisesInvalidArgumentExceptionWhenConnectBase(): void
     {
         $this->setUpService();
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
@@ -73,7 +73,7 @@ final class OAuthServiceTest extends \PHPUnit\Framework\TestCase
         $uriStr = $this->service->authorizeUrl(null, ['connect_base' => 'foo']);
     }
 
-    public function testDeauthorizeRaisesAuthenticationErrorWhenNoClientId()
+    public function testDeauthorizeRaisesAuthenticationErrorWhenNoClientId(): void
     {
         $this->setUpServiceWithNoClientId();
         $this->expectException(\Stripe\Exception\AuthenticationException::class);
@@ -81,7 +81,7 @@ final class OAuthServiceTest extends \PHPUnit\Framework\TestCase
         $this->service->deauthorize();
     }
 
-    public function testToken()
+    public function testToken(): void
     {
         $this->setUpService();
         $this->stubRequest(
@@ -114,7 +114,7 @@ final class OAuthServiceTest extends \PHPUnit\Framework\TestCase
         static::assertSame('sk_access_token', $resp->access_token);
     }
 
-    public function testDeauthorize()
+    public function testDeauthorize(): void
     {
         $this->setUpService();
         $this->stubRequest(

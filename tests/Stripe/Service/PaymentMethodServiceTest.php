@@ -23,13 +23,13 @@ final class PaymentMethodServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new PaymentMethodService($this->client);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $this->expectsRequest(
             'get',
@@ -43,7 +43,7 @@ final class PaymentMethodServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentMethod::class, $resources->data[0]);
     }
 
-    public function testAttach()
+    public function testAttach(): void
     {
         $this->expectsRequest(
             'post',
@@ -55,7 +55,7 @@ final class PaymentMethodServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentMethod::class, $resource);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->expectsRequest(
             'post',
@@ -67,7 +67,7 @@ final class PaymentMethodServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentMethod::class, $resource);
     }
 
-    public function testDetach()
+    public function testDetach(): void
     {
         $this->expectsRequest(
             'post',
@@ -77,7 +77,7 @@ final class PaymentMethodServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentMethod::class, $resource);
     }
 
-    public function testRetrieve()
+    public function testRetrieve(): void
     {
         $this->expectsRequest(
             'get',
@@ -87,7 +87,7 @@ final class PaymentMethodServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\PaymentMethod::class, $resource);
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $this->expectsRequest(
             'post',

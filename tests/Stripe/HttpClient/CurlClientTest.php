@@ -36,7 +36,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    public function saveOriginalNetworkValues()
+    public function saveOriginalNetworkValues(): void
     {
         $this->origMaxNetworkRetries = \Stripe\Stripe::getMaxNetworkRetries();
         $this->origMaxNetworkRetryDelay = \Stripe\Stripe::getMaxNetworkRetryDelay();
@@ -46,7 +46,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    public function setUpReflectors()
+    public function setUpReflectors(): void
     {
         $stripeReflector = new \ReflectionClass('\Stripe\Stripe');
 
@@ -68,19 +68,19 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
     /**
      * @after
      */
-    public function restoreOriginalNetworkValues()
+    public function restoreOriginalNetworkValues(): void
     {
         \Stripe\Stripe::setMaxNetworkRetries($this->origMaxNetworkRetries);
         $this->setMaxNetworkRetryDelay($this->origMaxNetworkRetryDelay);
         $this->setInitialNetworkRetryDelay($this->origInitialNetworkRetryDelay);
     }
 
-    private function setMaxNetworkRetryDelay($maxNetworkRetryDelay)
+    private function setMaxNetworkRetryDelay($maxNetworkRetryDelay): void
     {
         $this->maxNetworkRetryDelayProperty->setValue(null, $maxNetworkRetryDelay);
     }
 
-    private function setInitialNetworkRetryDelay($initialNetworkRetryDelay)
+    private function setInitialNetworkRetryDelay($initialNetworkRetryDelay): void
     {
         $this->initialNetworkRetryDelayProperty->setValue(null, $initialNetworkRetryDelay);
     }
@@ -93,7 +93,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         return $fakeRandomGenerator;
     }
 
-    public function testTimeout()
+    public function testTimeout(): void
     {
         $curl = new CurlClient();
         static::assertSame(CurlClient::DEFAULT_TIMEOUT, $curl->getTimeout());
@@ -110,7 +110,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame(0, $curl->getConnectTimeout());
     }
 
-    public function testUserAgentInfo()
+    public function testUserAgentInfo(): void
     {
         $curl = new CurlClient();
         $uaInfo = $curl->getUserAgentInfo();
@@ -119,7 +119,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertNotNull($uaInfo['ssllib']);
     }
 
-    public function testDefaultOptions()
+    public function testDefaultOptions(): void
     {
         // make sure options array loads/saves properly
         $optionsArray = [\CURLOPT_PROXY => 'localhost:80'];
@@ -146,7 +146,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         $withBadClosure->request('get', 'https://httpbin.org/status/200', [], [], false);
     }
 
-    public function testSslOption()
+    public function testSslOption(): void
     {
         // make sure options array loads/saves properly
         $optionsArray = [\CURLOPT_SSLVERSION => \CURL_SSLVERSION_TLSv1];
@@ -154,7 +154,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame($withOptionsArray->getDefaultOptions(), $optionsArray);
     }
 
-    public function testShouldRetryOnTimeout()
+    public function testShouldRetryOnTimeout(): void
     {
         \Stripe\Stripe::setMaxNetworkRetries(2);
 
@@ -163,7 +163,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($this->shouldRetryMethod->invoke($curlClient, \CURLE_OPERATION_TIMEOUTED, 0, [], 0));
     }
 
-    public function testShouldRetryOnConnectionFailure()
+    public function testShouldRetryOnConnectionFailure(): void
     {
         \Stripe\Stripe::setMaxNetworkRetries(2);
 
@@ -172,7 +172,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($this->shouldRetryMethod->invoke($curlClient, \CURLE_COULDNT_CONNECT, 0, [], 0));
     }
 
-    public function testShouldRetryOnConflict()
+    public function testShouldRetryOnConflict(): void
     {
         \Stripe\Stripe::setMaxNetworkRetries(2);
 
@@ -181,7 +181,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($this->shouldRetryMethod->invoke($curlClient, 0, 409, [], 0));
     }
 
-    public function testShouldNotRetryOn429()
+    public function testShouldNotRetryOn429(): void
     {
         \Stripe\Stripe::setMaxNetworkRetries(2);
 
@@ -190,7 +190,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertFalse($this->shouldRetryMethod->invoke($curlClient, 0, 429, [], 0));
     }
 
-    public function testShouldRetryOn500()
+    public function testShouldRetryOn500(): void
     {
         \Stripe\Stripe::setMaxNetworkRetries(2);
 
@@ -199,7 +199,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($this->shouldRetryMethod->invoke($curlClient, 0, 500, [], 0));
     }
 
-    public function testShouldRetryOn503()
+    public function testShouldRetryOn503(): void
     {
         \Stripe\Stripe::setMaxNetworkRetries(2);
 
@@ -208,7 +208,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($this->shouldRetryMethod->invoke($curlClient, 0, 503, [], 0));
     }
 
-    public function testShouldRetryOnStripeShouldRetryTrue()
+    public function testShouldRetryOnStripeShouldRetryTrue(): void
     {
         \Stripe\Stripe::setMaxNetworkRetries(2);
 
@@ -218,7 +218,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($this->shouldRetryMethod->invoke($curlClient, 0, 400, ['stripe-should-retry' => 'true'], 0));
     }
 
-    public function testShouldNotRetryOnStripeShouldRetryFalse()
+    public function testShouldNotRetryOnStripeShouldRetryFalse(): void
     {
         \Stripe\Stripe::setMaxNetworkRetries(2);
 
@@ -228,7 +228,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertFalse($this->shouldRetryMethod->invoke($curlClient, 0, 500, ['stripe-should-retry' => 'false'], 0));
     }
 
-    public function testShouldNotRetryAtMaximumCount()
+    public function testShouldNotRetryAtMaximumCount(): void
     {
         \Stripe\Stripe::setMaxNetworkRetries(2);
 
@@ -237,7 +237,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertFalse($this->shouldRetryMethod->invoke($curlClient, 0, 0, [], \Stripe\Stripe::getMaxNetworkRetries()));
     }
 
-    public function testShouldNotRetryOnCertValidationError()
+    public function testShouldNotRetryOnCertValidationError(): void
     {
         \Stripe\Stripe::setMaxNetworkRetries(2);
 
@@ -246,7 +246,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertFalse($this->shouldRetryMethod->invoke($curlClient, \CURLE_SSL_PEER_CERTIFICATE, -1, [], 0));
     }
 
-    public function testSleepTimeShouldGrowExponentially()
+    public function testSleepTimeShouldGrowExponentially(): void
     {
         $this->setMaxNetworkRetryDelay(999.0);
 
@@ -270,7 +270,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testSleepTimeShouldEnforceMaxNetworkRetryDelay()
+    public function testSleepTimeShouldEnforceMaxNetworkRetryDelay(): void
     {
         $this->setInitialNetworkRetryDelay(1.0);
         $this->setMaxNetworkRetryDelay(2);
@@ -283,7 +283,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame(2.0, $this->sleepTimeMethod->invoke($curlClient, 4, []));
     }
 
-    public function testSleepTimeShouldRespectRetryAfter()
+    public function testSleepTimeShouldRespectRetryAfter(): void
     {
         $this->setInitialNetworkRetryDelay(1.0);
         $this->setMaxNetworkRetryDelay(2.0);
@@ -298,7 +298,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame(2.0, $this->sleepTimeMethod->invoke($curlClient, 2, ['retry-after' => '100']));
     }
 
-    public function testSleepTimeShouldAddSomeRandomness()
+    public function testSleepTimeShouldAddSomeRandomness(): void
     {
         $randomValue = 0.8;
         $this->setInitialNetworkRetryDelay(1.0);
@@ -318,7 +318,7 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame($baseValue * 8, $this->sleepTimeMethod->invoke($curlClient, 4, []));
     }
 
-    public function testResponseHeadersCaseInsensitive()
+    public function testResponseHeadersCaseInsensitive(): void
     {
         $charge = \Stripe\Charge::all();
 
@@ -327,13 +327,13 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame($headers['request-id'], $headers['Request-Id']);
     }
 
-    public function testSetRequestStatusCallback()
+    public function testSetRequestStatusCallback(): void
     {
         try {
             $called = false;
 
             $curl = new CurlClient();
-            $curl->setRequestStatusCallback(function ($rbody, $rcode, $rheaders, $errno, $message, $willBeRetried, $numRetries) use (&$called) {
+            $curl->setRequestStatusCallback(function ($rbody, $rcode, $rheaders, $errno, $message, $willBeRetried, $numRetries) use (&$called): void {
                 $called = true;
 
                 $this->assertInternalType('string', $rbody);

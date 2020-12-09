@@ -12,7 +12,7 @@ final class OAuthErrorObjectTest extends \PHPUnit\Framework\TestCase
 {
     use TestHelper;
 
-    public function testDefaultValues()
+    public function testDefaultValues(): void
     {
         $error = OAuthErrorObject::constructFrom([]);
 

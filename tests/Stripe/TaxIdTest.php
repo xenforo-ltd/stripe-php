@@ -15,7 +15,7 @@ final class TaxIdTest extends \PHPUnit\Framework\TestCase
     const TEST_CUSTOMER_ID = 'cus_123';
     const TEST_RESOURCE_ID = 'txi_123';
 
-    public function testHasCorrectUrl()
+    public function testHasCorrectUrl(): void
     {
         $resource = \Stripe\Customer::retrieveTaxId(self::TEST_CUSTOMER_ID, self::TEST_RESOURCE_ID);
         static::assertSame(
@@ -24,7 +24,7 @@ final class TaxIdTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $resource = \Stripe\Customer::retrieveTaxId(self::TEST_CUSTOMER_ID, self::TEST_RESOURCE_ID);
         $this->expectsRequest(

@@ -97,7 +97,7 @@ class TaxId extends ApiResource
      *
      * @throws \Stripe\Exception\BadMethodCallException
      */
-    public static function retrieve($_id, $_opts = null)
+    public static function retrieve($_id, $_opts = null): void
     {
         $msg = 'Tax IDs cannot be retrieved without a customer ID. Retrieve ' .
                "a tax ID using `Customer::retrieveTaxId('customer_id', " .

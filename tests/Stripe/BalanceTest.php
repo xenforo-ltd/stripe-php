@@ -12,7 +12,7 @@ final class BalanceTest extends \PHPUnit\Framework\TestCase
 {
     use TestHelper;
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',

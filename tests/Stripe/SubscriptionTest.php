@@ -14,7 +14,7 @@ final class SubscriptionTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'sub_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class SubscriptionTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Subscription::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class SubscriptionTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Subscription::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -47,7 +47,7 @@ final class SubscriptionTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Subscription::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Subscription::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -59,7 +59,7 @@ final class SubscriptionTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Subscription::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -71,7 +71,7 @@ final class SubscriptionTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Subscription::class, $resource);
     }
 
-    public function testIsCancelable()
+    public function testIsCancelable(): void
     {
         $resource = Subscription::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -83,7 +83,7 @@ final class SubscriptionTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Subscription::class, $resource);
     }
 
-    public function testCanDeleteDiscount()
+    public function testCanDeleteDiscount(): void
     {
         $resource = Subscription::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -94,7 +94,7 @@ final class SubscriptionTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Subscription::class, $resource);
     }
 
-    public function testSerializeParametersItems()
+    public function testSerializeParametersItems(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'subscription',

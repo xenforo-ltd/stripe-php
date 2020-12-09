@@ -14,7 +14,7 @@ final class InvoiceItemTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'ii_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class InvoiceItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\InvoiceItem::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class InvoiceItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\InvoiceItem::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -49,7 +49,7 @@ final class InvoiceItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\InvoiceItem::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = InvoiceItem::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -61,7 +61,7 @@ final class InvoiceItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\InvoiceItem::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -73,7 +73,7 @@ final class InvoiceItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\InvoiceItem::class, $resource);
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $invoiceItem = InvoiceItem::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

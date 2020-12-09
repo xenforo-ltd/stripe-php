@@ -15,7 +15,7 @@ final class CustomerBalanceTransactionTest extends \PHPUnit\Framework\TestCase
     const TEST_CUSTOMER_ID = 'cus_123';
     const TEST_RESOURCE_ID = 'cbtxn_123';
 
-    public function testHasCorrectUrl()
+    public function testHasCorrectUrl(): void
     {
         $resource = \Stripe\Customer::retrieveBalanceTransaction(self::TEST_CUSTOMER_ID, self::TEST_RESOURCE_ID);
         static::assertSame(

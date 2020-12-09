@@ -14,7 +14,7 @@ final class CardholderTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'ich_123';
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $params = [
             'billing' => [
@@ -38,7 +38,7 @@ final class CardholderTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Cardholder::class, $resource);
     }
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -49,7 +49,7 @@ final class CardholderTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Cardholder::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -59,7 +59,7 @@ final class CardholderTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Cardholder::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Cardholder::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -72,7 +72,7 @@ final class CardholderTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Cardholder::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',

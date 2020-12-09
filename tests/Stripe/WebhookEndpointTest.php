@@ -14,7 +14,7 @@ final class WebhookEndpointTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'we_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class WebhookEndpointTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\WebhookEndpoint::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class WebhookEndpointTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\WebhookEndpoint::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -48,7 +48,7 @@ final class WebhookEndpointTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\WebhookEndpoint::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = WebhookEndpoint::retrieve(self::TEST_RESOURCE_ID);
         $resource->enabled_events = ['charge.succeeded'];
@@ -60,7 +60,7 @@ final class WebhookEndpointTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\WebhookEndpoint::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -72,7 +72,7 @@ final class WebhookEndpointTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\WebhookEndpoint::class, $resource);
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $resource = WebhookEndpoint::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

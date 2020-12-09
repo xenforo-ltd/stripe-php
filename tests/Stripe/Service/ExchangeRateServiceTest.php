@@ -21,20 +21,20 @@ final class ExchangeRateServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new ExchangeRateService($this->client);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $resources = $this->service->all();
         static::assertInternalType('array', $resources->data);
         static::assertInstanceOf(\Stripe\ExchangeRate::class, $resources->data[0]);
     }
 
-    public function testRetrieve()
+    public function testRetrieve(): void
     {
         $resource = $this->service->retrieve('usd');
         static::assertInstanceOf(\Stripe\ExchangeRate::class, $resource);

@@ -134,7 +134,7 @@ class ApiRequestor
      * @throws Exception\UnexpectedValueException
      * @throws Exception\ApiErrorException
      */
-    public function handleErrorResponse($rbody, $rcode, $rheaders, $resp)
+    public function handleErrorResponse($rbody, $rcode, $rheaders, $resp): void
     {
         if (!\is_array($resp) || !isset($resp['error'])) {
             $msg = "Invalid response object from API: {$rbody} "
@@ -499,7 +499,7 @@ class ApiRequestor
      *
      * @param HttpClient\ClientInterface $client
      */
-    public static function setHttpClient($client)
+    public static function setHttpClient($client): void
     {
         self::$_httpClient = $client;
     }
@@ -509,7 +509,7 @@ class ApiRequestor
      *
      * Resets any stateful telemetry data
      */
-    public static function resetTelemetry()
+    public static function resetTelemetry(): void
     {
         self::$requestTelemetry = null;
     }

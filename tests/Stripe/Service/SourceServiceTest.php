@@ -23,13 +23,13 @@ final class SourceServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new SourceService($this->client);
     }
 
-    public function testAllTransactions()
+    public function testAllTransactions(): void
     {
         $this->expectsRequest(
             'get',
@@ -40,7 +40,7 @@ final class SourceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SourceTransaction::class, $resources->data[0]);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->expectsRequest(
             'post',
@@ -52,7 +52,7 @@ final class SourceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Source::class, $resource);
     }
 
-    public function testDetach()
+    public function testDetach(): void
     {
         $this->expectsRequest(
             'delete',
@@ -62,7 +62,7 @@ final class SourceServiceTest extends \PHPUnit\Framework\TestCase
         //static::assertInstanceOf(\Stripe\Source::class, $resource);
     }
 
-    public function testRetrieve()
+    public function testRetrieve(): void
     {
         $this->expectsRequest(
             'get',
@@ -72,7 +72,7 @@ final class SourceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Source::class, $resource);
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $this->expectsRequest(
             'post',
@@ -84,7 +84,7 @@ final class SourceServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Source::class, $resource);
     }
 
-    public function testVerify()
+    public function testVerify(): void
     {
         $this->expectsRequest(
             'post',

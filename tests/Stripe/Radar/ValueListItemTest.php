@@ -14,7 +14,7 @@ final class ValueListItemTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'rsli_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -27,7 +27,7 @@ final class ValueListItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Radar\ValueListItem::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -37,7 +37,7 @@ final class ValueListItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Radar\ValueListItem::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -50,7 +50,7 @@ final class ValueListItemTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Radar\ValueListItem::class, $resource);
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $resource = ValueListItem::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

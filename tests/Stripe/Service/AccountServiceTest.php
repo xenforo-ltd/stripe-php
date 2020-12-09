@@ -26,13 +26,13 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new AccountService($this->client);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $this->expectsRequest(
             'get',
@@ -43,7 +43,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Account::class, $resources->data[0]);
     }
 
-    public function testAllCapabilities()
+    public function testAllCapabilities(): void
     {
         $this->expectsRequest(
             'get',
@@ -54,7 +54,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Capability::class, $resources->data[0]);
     }
 
-    public function testAllExternalAccounts()
+    public function testAllExternalAccounts(): void
     {
         $this->expectsRequest(
             'get',
@@ -65,7 +65,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\BankAccount::class, $resources->data[0]);
     }
 
-    public function testAllPersons()
+    public function testAllPersons(): void
     {
         $this->expectsRequest(
             'get',
@@ -76,7 +76,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Person::class, $resources->data[0]);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->expectsRequest(
             'post',
@@ -86,7 +86,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Account::class, $resource);
     }
 
-    public function testCreateExternalAccount()
+    public function testCreateExternalAccount(): void
     {
         $this->expectsRequest(
             'post',
@@ -98,7 +98,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\BankAccount::class, $resource);
     }
 
-    public function testCreateLoginLink()
+    public function testCreateLoginLink(): void
     {
         $this->expectsRequest(
             'post',
@@ -108,7 +108,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\LoginLink::class, $resource);
     }
 
-    public function testCreatePerson()
+    public function testCreatePerson(): void
     {
         $this->expectsRequest(
             'post',
@@ -124,7 +124,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Person::class, $resource);
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $this->expectsRequest(
             'delete',
@@ -135,7 +135,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($resource->isDeleted());
     }
 
-    public function testDeleteExternalAccount()
+    public function testDeleteExternalAccount(): void
     {
         $this->expectsRequest(
             'delete',
@@ -146,7 +146,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($resource->isDeleted());
     }
 
-    public function testDeletePerson()
+    public function testDeletePerson(): void
     {
         $this->expectsRequest(
             'delete',
@@ -157,7 +157,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($resource->isDeleted());
     }
 
-    public function testReject()
+    public function testReject(): void
     {
         $this->expectsRequest(
             'post',
@@ -167,7 +167,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Account::class, $resource);
     }
 
-    public function testRetrieveCapability()
+    public function testRetrieveCapability(): void
     {
         $this->expectsRequest(
             'get',
@@ -177,7 +177,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Capability::class, $resource);
     }
 
-    public function testRetrieveExternalAccount()
+    public function testRetrieveExternalAccount(): void
     {
         $this->expectsRequest(
             'get',
@@ -187,7 +187,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\BankAccount::class, $resource);
     }
 
-    public function testRetrievePerson()
+    public function testRetrievePerson(): void
     {
         $this->expectsRequest(
             'get',
@@ -197,7 +197,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Person::class, $resource);
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $this->expectsRequest(
             'post',
@@ -209,7 +209,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Account::class, $resource);
     }
 
-    public function testUpdateCapability()
+    public function testUpdateCapability(): void
     {
         $this->expectsRequest(
             'post',
@@ -221,7 +221,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Capability::class, $resource);
     }
 
-    public function testUpdateExternalAccount()
+    public function testUpdateExternalAccount(): void
     {
         $this->expectsRequest(
             'post',
@@ -233,7 +233,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\BankAccount::class, $resource);
     }
 
-    public function testUpdatePerson()
+    public function testUpdatePerson(): void
     {
         $this->expectsRequest(
             'post',
@@ -245,7 +245,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Person::class, $resource);
     }
 
-    public function testRetrieveWithId()
+    public function testRetrieveWithId(): void
     {
         $this->expectsRequest(
             'get',
@@ -255,7 +255,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Account::class, $resource);
     }
 
-    public function testRetrieveWithoutId()
+    public function testRetrieveWithoutId(): void
     {
         $this->expectsRequest(
             'get',

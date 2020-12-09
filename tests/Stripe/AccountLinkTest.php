@@ -12,7 +12,7 @@ final class AccountLinkTest extends \PHPUnit\Framework\TestCase
 {
     use TestHelper;
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',

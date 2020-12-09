@@ -12,7 +12,7 @@ final class DefaultLoggerTest extends \PHPUnit\Framework\TestCase
 {
     use \Stripe\TestHelper;
 
-    public function testDefaultLogger()
+    public function testDefaultLogger(): void
     {
         // DefaultLogger uses PHP's `error_log` function. In order to capture
         // the output, we need to temporarily redirect it to a temporary file.

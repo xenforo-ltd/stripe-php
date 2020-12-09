@@ -14,7 +14,7 @@ final class PayoutTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'po_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class PayoutTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Payout::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class PayoutTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Payout::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -48,7 +48,7 @@ final class PayoutTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Payout::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Payout::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -60,7 +60,7 @@ final class PayoutTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Payout::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -72,7 +72,7 @@ final class PayoutTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Payout::class, $resource);
     }
 
-    public function testIsCancelable()
+    public function testIsCancelable(): void
     {
         $resource = Payout::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -83,7 +83,7 @@ final class PayoutTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Payout::class, $resource);
     }
 
-    public function testIsReverseable()
+    public function testIsReverseable(): void
     {
         $resource = Payout::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

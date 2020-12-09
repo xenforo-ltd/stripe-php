@@ -14,7 +14,7 @@ final class CreditNoteTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'cn_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class CreditNoteTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CreditNote::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class CreditNoteTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CreditNote::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -49,7 +49,7 @@ final class CreditNoteTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CreditNote::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = CreditNote::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -61,7 +61,7 @@ final class CreditNoteTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CreditNote::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -73,7 +73,7 @@ final class CreditNoteTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CreditNote::class, $resource);
     }
 
-    public function testCanPreview()
+    public function testCanPreview(): void
     {
         $this->expectsRequest(
             'get',
@@ -86,7 +86,7 @@ final class CreditNoteTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\CreditNote::class, $resource);
     }
 
-    public function testCanVoidCreditNote()
+    public function testCanVoidCreditNote(): void
     {
         $creditNote = CreditNote::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(
@@ -98,7 +98,7 @@ final class CreditNoteTest extends \PHPUnit\Framework\TestCase
         static::assertSame($resource, $creditNote);
     }
 
-    public function testCanListLines()
+    public function testCanListLines(): void
     {
         $this->expectsRequest(
             'get',

@@ -14,20 +14,20 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
     private $optsReflector;
 
     /** @before */
-    protected function setUpOptsReflector()
+    protected function setUpOptsReflector(): void
     {
         $this->optsReflector = new \ReflectionProperty(\Stripe\StripeObject::class, '_opts');
         $this->optsReflector->setAccessible(true);
     }
 
-    public function testCtorDoesNotThrowWhenNoParams()
+    public function testCtorDoesNotThrowWhenNoParams(): void
     {
         $client = new BaseStripeClient();
         static::assertNotNull($client);
         static::assertNull($client->getApiKey());
     }
 
-    public function testCtorThrowsIfConfigIsUnexpectedType()
+    public function testCtorThrowsIfConfigIsUnexpectedType(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('$config must be a string or an array');
@@ -35,7 +35,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         $client = new BaseStripeClient(234);
     }
 
-    public function testCtorThrowsIfApiKeyIsEmpty()
+    public function testCtorThrowsIfApiKeyIsEmpty(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('api_key cannot be the empty string');
@@ -43,7 +43,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         $client = new BaseStripeClient('');
     }
 
-    public function testCtorThrowsIfApiKeyContainsWhitespace()
+    public function testCtorThrowsIfApiKeyContainsWhitespace(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('api_key cannot contain whitespace');
@@ -51,7 +51,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         $client = new BaseStripeClient("sk_test_123\n");
     }
 
-    public function testCtorThrowsIfApiKeyIsUnexpectedType()
+    public function testCtorThrowsIfApiKeyIsUnexpectedType(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('api_key must be null or a string');
@@ -59,7 +59,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         $client = new BaseStripeClient(['api_key' => 234]);
     }
 
-    public function testCtorThrowsIfConfigArrayContainsUnexpectedKey()
+    public function testCtorThrowsIfConfigArrayContainsUnexpectedKey(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('Found unknown key(s) in configuration array: \'foo\', \'foo2\'');
@@ -67,7 +67,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         $client = new BaseStripeClient(['foo' => 'bar', 'foo2' => 'bar2']);
     }
 
-    public function testRequestWithClientApiKey()
+    public function testRequestWithClientApiKey(): void
     {
         $client = new BaseStripeClient(['api_key' => 'sk_test_client', 'api_base' => MOCK_URL]);
         $charge = $client->request('get', '/v1/charges/ch_123', [], []);
@@ -75,7 +75,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame('sk_test_client', $this->optsReflector->getValue($charge)->apiKey);
     }
 
-    public function testRequestWithOptsApiKey()
+    public function testRequestWithOptsApiKey(): void
     {
         $client = new BaseStripeClient(['api_base' => MOCK_URL]);
         $charge = $client->request('get', '/v1/charges/ch_123', [], ['api_key' => 'sk_test_opts']);
@@ -83,7 +83,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame('sk_test_opts', $this->optsReflector->getValue($charge)->apiKey);
     }
 
-    public function testRequestThrowsIfNoApiKeyInClientAndOpts()
+    public function testRequestThrowsIfNoApiKeyInClientAndOpts(): void
     {
         $this->expectException(\Stripe\Exception\AuthenticationException::class);
         $this->expectExceptionMessage('No API key provided.');
@@ -94,7 +94,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame('ch_123', $charge->id);
     }
 
-    public function testRequestThrowsIfOptsIsString()
+    public function testRequestThrowsIfOptsIsString(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessageRegExp('#Do not pass a string for request options.#');
@@ -105,7 +105,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame('ch_123', $charge->id);
     }
 
-    public function testRequestThrowsIfOptsIsArrayWithUnexpectedKeys()
+    public function testRequestThrowsIfOptsIsArrayWithUnexpectedKeys(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('Got unexpected keys in options array: foo');
@@ -116,7 +116,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame('ch_123', $charge->id);
     }
 
-    public function testRequestWithClientStripeVersion()
+    public function testRequestWithClientStripeVersion(): void
     {
         $client = new BaseStripeClient([
             'api_key' => 'sk_test_client',
@@ -128,7 +128,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame('2020-03-02', $this->optsReflector->getValue($charge)->headers['Stripe-Version']);
     }
 
-    public function testRequestWithOptsStripeVersion()
+    public function testRequestWithOptsStripeVersion(): void
     {
         $client = new BaseStripeClient([
             'api_key' => 'sk_test_client',
@@ -140,7 +140,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame('2019-12-03', $this->optsReflector->getValue($charge)->headers['Stripe-Version']);
     }
 
-    public function testRequestWithClientStripeAccount()
+    public function testRequestWithClientStripeAccount(): void
     {
         $client = new BaseStripeClient([
             'api_key' => 'sk_test_client',
@@ -152,7 +152,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame('acct_123', $this->optsReflector->getValue($charge)->headers['Stripe-Account']);
     }
 
-    public function testRequestWithOptsStripeAccount()
+    public function testRequestWithOptsStripeAccount(): void
     {
         $client = new BaseStripeClient([
             'api_key' => 'sk_test_client',
@@ -164,7 +164,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame('acct_456', $this->optsReflector->getValue($charge)->headers['Stripe-Account']);
     }
 
-    public function testRequestCollectionWithClientApiKey()
+    public function testRequestCollectionWithClientApiKey(): void
     {
         $client = new BaseStripeClient(['api_key' => 'sk_test_client', 'api_base' => MOCK_URL]);
         $charges = $client->requestCollection('get', '/v1/charges', [], []);
@@ -172,7 +172,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         static::assertSame('sk_test_client', $this->optsReflector->getValue($charges)->apiKey);
     }
 
-    public function testRequestCollectionThrowsForNonList()
+    public function testRequestCollectionThrowsForNonList(): void
     {
         $this->expectException(\Stripe\Exception\UnexpectedValueException::class);
         $this->expectExceptionMessage('Expected to receive `Stripe\Collection` object from Stripe API. Instead received `Stripe\Charge`.');
@@ -181,7 +181,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
         $client->requestCollection('get', '/v1/charges/ch_123', [], []);
     }
 
-    public function testRequestWithOptsInParamsWarns()
+    public function testRequestWithOptsInParamsWarns(): void
     {
         $this->expectException(\PHPUnit\Framework\Error\Warning::class);
         $this->expectExceptionMessage('Options found in $params: api_key, stripe_account, api_base. Options should be '

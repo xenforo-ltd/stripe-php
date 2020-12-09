@@ -59,7 +59,7 @@ class StripeMock
     /**
      * Stops the stripe-mock process, if one was started. Otherwise do nothing.
      */
-    public static function stop()
+    public static function stop(): void
     {
         if (null === static::$process || !static::$process->isRunning()) {
             return;

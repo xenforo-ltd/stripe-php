@@ -12,7 +12,7 @@ final class ExchangeRateTest extends \PHPUnit\Framework\TestCase
 {
     use TestHelper;
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->stubRequest(
             'get',
@@ -42,7 +42,7 @@ final class ExchangeRateTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\ExchangeRate::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->stubRequest(
             'get',

@@ -18,7 +18,7 @@ final class StripeTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    public function saveOriginalValues()
+    public function saveOriginalValues(): void
     {
         $this->orig = [
             'caBundlePath' => Stripe::$caBundlePath,
@@ -28,12 +28,12 @@ final class StripeTest extends \PHPUnit\Framework\TestCase
     /**
      * @after
      */
-    public function restoreOriginalValues()
+    public function restoreOriginalValues(): void
     {
         Stripe::$caBundlePath = $this->orig['caBundlePath'];
     }
 
-    public function testCABundlePathAccessors()
+    public function testCABundlePathAccessors(): void
     {
         Stripe::setCABundlePath('path/to/ca/bundle');
         static::assertSame('path/to/ca/bundle', Stripe::getCABundlePath());

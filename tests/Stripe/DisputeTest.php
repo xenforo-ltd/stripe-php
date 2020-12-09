@@ -14,7 +14,7 @@ final class DisputeTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'dp_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class DisputeTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Dispute::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class DisputeTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Dispute::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Dispute::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -47,7 +47,7 @@ final class DisputeTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Dispute::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -59,7 +59,7 @@ final class DisputeTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Dispute::class, $resource);
     }
 
-    public function testIsClosable()
+    public function testIsClosable(): void
     {
         $dispute = Dispute::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

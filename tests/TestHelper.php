@@ -28,7 +28,7 @@ trait TestHelper
     protected $clientMock;
 
     /** @before */
-    protected function setUpConfig()
+    protected function setUpConfig(): void
     {
         // Save original values so that we can restore them after running tests
         $this->origApiBase = Stripe::$apiBase;
@@ -52,7 +52,7 @@ trait TestHelper
     }
 
     /** @after */
-    protected function tearDownConfig()
+    protected function tearDownConfig(): void
     {
         // Restore original values
         Stripe::$apiBase = $this->origApiBase;
@@ -84,7 +84,7 @@ trait TestHelper
         $headers = null,
         $hasFile = false,
         $base = null
-    ) {
+    ): void {
         $this->prepareRequestMock($method, $path, $params, $headers, $hasFile, $base)
             ->willReturnCallback(
                 function ($method, $absUrl, $headers, $params, $hasFile) {

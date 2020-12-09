@@ -12,7 +12,7 @@ final class UtilTest extends \PHPUnit\Framework\TestCase
 {
     use \Stripe\TestHelper;
 
-    public function testIsList()
+    public function testIsList(): void
     {
         $list = [5, 'nstaoush', []];
         static::assertTrue(Util::isList($list));
@@ -21,7 +21,7 @@ final class UtilTest extends \PHPUnit\Framework\TestCase
         static::assertFalse(Util::isList($notlist));
     }
 
-    public function testThatPHPHasValueSemanticsForArrays()
+    public function testThatPHPHasValueSemanticsForArrays(): void
     {
         $original = ['php-arrays' => 'value-semantics'];
         $derived = $original;
@@ -30,7 +30,7 @@ final class UtilTest extends \PHPUnit\Framework\TestCase
         static::assertSame('value-semantics', $original['php-arrays']);
     }
 
-    public function testConvertStripeObjectToArrayIncludesId()
+    public function testConvertStripeObjectToArrayIncludesId(): void
     {
         $customer = Util::convertToStripeObject(
             [
@@ -42,7 +42,7 @@ final class UtilTest extends \PHPUnit\Framework\TestCase
         static::assertArrayHasKey('id', $customer->toArray());
     }
 
-    public function testUtf8()
+    public function testUtf8(): void
     {
         // UTF-8 string
         $x = "\xc3\xa9";
@@ -57,7 +57,7 @@ final class UtilTest extends \PHPUnit\Framework\TestCase
         static::assertSame(Util::utf8($x), $x);
     }
 
-    public function testObjectsToIds()
+    public function testObjectsToIds(): void
     {
         $params = [
             'foo' => 'bar',
@@ -80,7 +80,7 @@ final class UtilTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testEncodeParameters()
+    public function testEncodeParameters(): void
     {
         $params = [
             'a' => 3,
@@ -100,7 +100,7 @@ final class UtilTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testUrlEncode()
+    public function testUrlEncode(): void
     {
         static::assertSame('foo', Util::urlEncode('foo'));
         static::assertSame('foo%2B', Util::urlEncode('foo+'));
@@ -108,7 +108,7 @@ final class UtilTest extends \PHPUnit\Framework\TestCase
         static::assertSame('foo[bar]', Util::urlEncode('foo[bar]'));
     }
 
-    public function testFlattenParams()
+    public function testFlattenParams(): void
     {
         $params = [
             'a' => 3,

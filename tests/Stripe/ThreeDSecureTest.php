@@ -14,7 +14,7 @@ final class ThreeDSecureTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'tdsrc_123';
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -24,7 +24,7 @@ final class ThreeDSecureTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\ThreeDSecure::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',

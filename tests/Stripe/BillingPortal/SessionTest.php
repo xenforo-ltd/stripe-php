@@ -14,7 +14,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'pts_123';
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',

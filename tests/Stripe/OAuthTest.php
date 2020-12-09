@@ -12,7 +12,7 @@ final class OAuthTest extends \PHPUnit\Framework\TestCase
 {
     use TestHelper;
 
-    public function testAuthorizeUrl()
+    public function testAuthorizeUrl(): void
     {
         $uriStr = OAuth::authorizeUrl([
             'scope' => 'read_write',
@@ -38,7 +38,7 @@ final class OAuthTest extends \PHPUnit\Framework\TestCase
         static::assertSame('US', $params['stripe_user']['country']);
     }
 
-    public function testRaisesAuthenticationErrorWhenNoClientId()
+    public function testRaisesAuthenticationErrorWhenNoClientId(): void
     {
         $this->expectException(\Stripe\Exception\AuthenticationException::class);
         $this->expectExceptionMessageRegExp('#No client_id provided#');
@@ -47,7 +47,7 @@ final class OAuthTest extends \PHPUnit\Framework\TestCase
         OAuth::authorizeUrl();
     }
 
-    public function testToken()
+    public function testToken(): void
     {
         $this->stubRequest(
             'POST',
@@ -78,7 +78,7 @@ final class OAuthTest extends \PHPUnit\Framework\TestCase
         static::assertSame('sk_access_token', $resp->access_token);
     }
 
-    public function testDeauthorize()
+    public function testDeauthorize(): void
     {
         $this->stubRequest(
             'POST',

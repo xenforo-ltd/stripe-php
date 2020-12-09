@@ -23,13 +23,13 @@ final class ReportRunServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new ReportRunService($this->client);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $this->expectsRequest(
             'get',
@@ -40,7 +40,7 @@ final class ReportRunServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Reporting\ReportRun::class, $resources->data[0]);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $params = [
             'parameters' => [
@@ -58,7 +58,7 @@ final class ReportRunServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Reporting\ReportRun::class, $resource);
     }
 
-    public function testRetrieve()
+    public function testRetrieve(): void
     {
         $this->expectsRequest(
             'get',

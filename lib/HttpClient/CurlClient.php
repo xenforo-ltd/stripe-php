@@ -82,7 +82,7 @@ class CurlClient implements ClientInterface
         $this->closeCurlHandle();
     }
 
-    public function initUserAgentInfo()
+    public function initUserAgentInfo(): void
     {
         $curlVersion = \curl_version();
         $this->userAgentInfo = [
@@ -112,7 +112,7 @@ class CurlClient implements ClientInterface
     /**
      * @param bool $enable
      */
-    public function setEnablePersistentConnections($enable)
+    public function setEnablePersistentConnections($enable): void
     {
         $this->enablePersistentConnections = $enable;
     }
@@ -128,7 +128,7 @@ class CurlClient implements ClientInterface
     /**
      * @param bool $enable
      */
-    public function setEnableHttp2($enable)
+    public function setEnableHttp2($enable): void
     {
         $this->enableHttp2 = $enable;
     }
@@ -156,7 +156,7 @@ class CurlClient implements ClientInterface
      *
      * @param null|callable $requestStatusCallback
      */
-    public function setRequestStatusCallback($requestStatusCallback)
+    public function setRequestStatusCallback($requestStatusCallback): void
     {
         $this->requestStatusCallback = $requestStatusCallback;
     }
@@ -356,7 +356,7 @@ class CurlClient implements ClientInterface
      *
      * @throws Exception\ApiConnectionException
      */
-    private function handleCurlError($url, $errno, $message, $numRetries)
+    private function handleCurlError($url, $errno, $message, $numRetries): void
     {
         switch ($errno) {
             case \CURLE_COULDNT_CONNECT:
@@ -488,7 +488,7 @@ class CurlClient implements ClientInterface
     /**
      * Initializes the curl handle. If already initialized, the handle is closed first.
      */
-    private function initCurlHandle()
+    private function initCurlHandle(): void
     {
         $this->closeCurlHandle();
         $this->curlHandle = \curl_init();
@@ -497,7 +497,7 @@ class CurlClient implements ClientInterface
     /**
      * Closes the curl handle if initialized. Do nothing if already closed.
      */
-    private function closeCurlHandle()
+    private function closeCurlHandle(): void
     {
         if (null !== $this->curlHandle) {
             \curl_close($this->curlHandle);
@@ -509,7 +509,7 @@ class CurlClient implements ClientInterface
      * Resets the curl handle. If the handle is not already initialized, or if persistent
      * connections are disabled, the handle is reinitialized instead.
      */
-    private function resetCurlHandle()
+    private function resetCurlHandle(): void
     {
         if (null !== $this->curlHandle && $this->getEnablePersistentConnections()) {
             \curl_reset($this->curlHandle);

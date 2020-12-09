@@ -14,7 +14,7 @@ final class AuthorizationTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'iauth_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class AuthorizationTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Authorization::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class AuthorizationTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Authorization::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Authorization::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -48,7 +48,7 @@ final class AuthorizationTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Authorization::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -61,7 +61,7 @@ final class AuthorizationTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Authorization::class, $resource);
     }
 
-    public function testIsApprovable()
+    public function testIsApprovable(): void
     {
         $resource = Authorization::retrieve(self::TEST_RESOURCE_ID);
 
@@ -73,7 +73,7 @@ final class AuthorizationTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Issuing\Authorization::class, $resource);
     }
 
-    public function testIsDeclinable()
+    public function testIsDeclinable(): void
     {
         $resource = Authorization::retrieve(self::TEST_RESOURCE_ID);
 

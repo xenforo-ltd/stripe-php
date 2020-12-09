@@ -14,7 +14,7 @@ final class SKUTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'sku_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class SKUTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SKU::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class SKUTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SKU::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -53,7 +53,7 @@ final class SKUTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SKU::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = SKU::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -65,7 +65,7 @@ final class SKUTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SKU::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -77,7 +77,7 @@ final class SKUTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\SKU::class, $resource);
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $resource = SKU::retrieve(self::TEST_RESOURCE_ID);
         $this->expectsRequest(

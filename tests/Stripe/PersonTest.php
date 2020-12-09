@@ -15,7 +15,7 @@ final class PersonTest extends \PHPUnit\Framework\TestCase
     const TEST_ACCOUNT_ID = 'acct_123';
     const TEST_RESOURCE_ID = 'person_123';
 
-    public function testHasCorrectUrl()
+    public function testHasCorrectUrl(): void
     {
         $resource = \Stripe\Account::retrievePerson(self::TEST_ACCOUNT_ID, self::TEST_RESOURCE_ID);
         static::assertSame(
@@ -24,14 +24,14 @@ final class PersonTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testIsNotDirectlyRetrievable()
+    public function testIsNotDirectlyRetrievable(): void
     {
         $this->expectException(\Stripe\Exception\BadMethodCallException::class);
 
         Person::retrieve(self::TEST_RESOURCE_ID);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = \Stripe\Account::retrievePerson(self::TEST_ACCOUNT_ID, self::TEST_RESOURCE_ID);
         $resource->first_name = 'value';
@@ -43,7 +43,7 @@ final class PersonTest extends \PHPUnit\Framework\TestCase
         static::assertSame(\Stripe\Person::class, \get_class($resource));
     }
 
-    public function testIsNotDirectlyUpdatable()
+    public function testIsNotDirectlyUpdatable(): void
     {
         $this->expectException(\Stripe\Exception\BadMethodCallException::class);
 
@@ -52,7 +52,7 @@ final class PersonTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testIsDeletable()
+    public function testIsDeletable(): void
     {
         $resource = \Stripe\Account::retrievePerson(self::TEST_ACCOUNT_ID, self::TEST_RESOURCE_ID);
         $this->expectsRequest(

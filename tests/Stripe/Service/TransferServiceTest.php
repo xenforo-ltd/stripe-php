@@ -24,13 +24,13 @@ final class TransferServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new TransferService($this->client);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $this->expectsRequest(
             'get',
@@ -41,7 +41,7 @@ final class TransferServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Transfer::class, $resources->data[0]);
     }
 
-    public function testAllReversals()
+    public function testAllReversals(): void
     {
         $this->expectsRequest(
             'get',
@@ -52,7 +52,7 @@ final class TransferServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\TransferReversal::class, $resources->data[0]);
     }
 
-    public function testCancel()
+    public function testCancel(): void
     {
         // stripe-mock does not support this anymore so we stub it
         $this->stubRequest(
@@ -69,7 +69,7 @@ final class TransferServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Transfer::class, $resource);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->expectsRequest(
             'post',
@@ -83,7 +83,7 @@ final class TransferServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Transfer::class, $resource);
     }
 
-    public function testCreateReversal()
+    public function testCreateReversal(): void
     {
         $this->expectsRequest(
             'post',
@@ -93,7 +93,7 @@ final class TransferServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\TransferReversal::class, $resource);
     }
 
-    public function testRetrieve()
+    public function testRetrieve(): void
     {
         $this->expectsRequest(
             'get',
@@ -103,7 +103,7 @@ final class TransferServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Transfer::class, $resource);
     }
 
-    public function testRetrieveReversal()
+    public function testRetrieveReversal(): void
     {
         $this->expectsRequest(
             'get',
@@ -113,7 +113,7 @@ final class TransferServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\TransferReversal::class, $resource);
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $this->expectsRequest(
             'post',
@@ -125,7 +125,7 @@ final class TransferServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Transfer::class, $resource);
     }
 
-    public function testUpdateReversal()
+    public function testUpdateReversal(): void
     {
         $this->expectsRequest(
             'post',

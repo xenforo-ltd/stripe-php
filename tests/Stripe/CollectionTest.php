@@ -18,7 +18,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    public function setUpFixture()
+    public function setUpFixture(): void
     {
         $this->fixture = Collection::constructFrom([
             'data' => [['id' => '1']],
@@ -27,7 +27,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testOffsetGetNumericIndex()
+    public function testOffsetGetNumericIndex(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessageRegExp('/You tried to access the \\d index/');
@@ -35,7 +35,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         $this->fixture[0];
     }
 
-    public function testCanList()
+    public function testCanList(): void
     {
         $this->stubRequest(
             'GET',
@@ -55,7 +55,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         static::assertInternalType('array', $resources->data);
     }
 
-    public function testCanRetrieve()
+    public function testCanRetrieve(): void
     {
         $this->stubRequest(
             'GET',
@@ -71,7 +71,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         $this->fixture->retrieve('1');
     }
 
-    public function testCanCreate()
+    public function testCanCreate(): void
     {
         $this->stubRequest(
             'POST',
@@ -91,7 +91,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testCanCount()
+    public function testCanCount(): void
     {
         $collection = Collection::constructFrom([
             'data' => [['id' => '1']],
@@ -104,7 +104,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         static::assertCount(3, $collection);
     }
 
-    public function testCanIterate()
+    public function testCanIterate(): void
     {
         $collection = Collection::constructFrom([
             'data' => [['id' => '1'], ['id' => '2'], ['id' => '3']],
@@ -120,7 +120,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         static::assertSame(['1', '2', '3'], $seen);
     }
 
-    public function testCanIterateBackwards()
+    public function testCanIterateBackwards(): void
     {
         $collection = Collection::constructFrom([
             'data' => [['id' => '1'], ['id' => '2'], ['id' => '3']],
@@ -136,7 +136,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         static::assertSame(['3', '2', '1'], $seen);
     }
 
-    public function testSupportsIteratorToArray()
+    public function testSupportsIteratorToArray(): void
     {
         $seen = [];
         foreach (\iterator_to_array($this->fixture) as $item) {
@@ -146,7 +146,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         static::assertSame(['1'], $seen);
     }
 
-    public function testProvidesAutoPagingIterator()
+    public function testProvidesAutoPagingIterator(): void
     {
         $this->stubRequest(
             'GET',
@@ -171,7 +171,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         static::assertSame(['1', '2', '3'], $seen);
     }
 
-    public function testAutoPagingIteratorSupportsIteratorToArray()
+    public function testAutoPagingIteratorSupportsIteratorToArray(): void
     {
         $this->stubRequest(
             'GET',
@@ -196,7 +196,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         static::assertSame(['1', '2', '3'], $seen);
     }
 
-    public function testProvidesAutoPagingIteratorThatSupportsBackwardsPagination()
+    public function testProvidesAutoPagingIteratorThatSupportsBackwardsPagination(): void
     {
         $this->stubRequest(
             'GET',
@@ -228,7 +228,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         static::assertSame(['3', '2', '1'], $seen);
     }
 
-    public function testHeaders()
+    public function testHeaders(): void
     {
         $this->stubRequest(
             'POST',
@@ -254,13 +254,13 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testEmptyCollection()
+    public function testEmptyCollection(): void
     {
         $emptyCollection = Collection::emptyCollection();
         static::assertSame([], $emptyCollection->data);
     }
 
-    public function testIsEmpty()
+    public function testIsEmpty(): void
     {
         $empty = Collection::constructFrom(['data' => []]);
         static::assertTrue($empty->isEmpty());
@@ -269,7 +269,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         static::assertFalse($notEmpty->isEmpty());
     }
 
-    public function testNextPage()
+    public function testNextPage(): void
     {
         $this->stubRequest(
             'GET',
@@ -294,7 +294,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         static::assertSame(['2', '3'], $ids);
     }
 
-    public function testPreviousPage()
+    public function testPreviousPage(): void
     {
         $this->stubRequest(
             'GET',
@@ -315,7 +315,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         static::assertSame([], $previousPage->data);
     }
 
-    public function testFirst()
+    public function testFirst(): void
     {
         $collection = Collection::constructFrom([
             'data' => [
@@ -327,7 +327,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         static::assertSame('first', $collection->first()['content']);
     }
 
-    public function testLast()
+    public function testLast(): void
     {
         $collection = Collection::constructFrom([
             'data' => [

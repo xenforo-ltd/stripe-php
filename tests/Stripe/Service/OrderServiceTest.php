@@ -23,13 +23,13 @@ final class OrderServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function setUpService()
+    protected function setUpService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         $this->service = new OrderService($this->client);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $this->expectsRequest(
             'get',
@@ -40,7 +40,7 @@ final class OrderServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Order::class, $resources->data[0]);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->expectsRequest(
             'post',
@@ -52,7 +52,7 @@ final class OrderServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Order::class, $resource);
     }
 
-    public function testPay()
+    public function testPay(): void
     {
         $this->expectsRequest(
             'post',
@@ -62,7 +62,7 @@ final class OrderServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Order::class, $resource);
     }
 
-    public function testRetrieve()
+    public function testRetrieve(): void
     {
         $this->expectsRequest(
             'get',
@@ -72,7 +72,7 @@ final class OrderServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Order::class, $resource);
     }
 
-    public function testReturnOrder()
+    public function testReturnOrder(): void
     {
         $this->expectsRequest(
             'post',
@@ -82,7 +82,7 @@ final class OrderServiceTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\OrderReturn::class, $resource);
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $this->expectsRequest(
             'post',

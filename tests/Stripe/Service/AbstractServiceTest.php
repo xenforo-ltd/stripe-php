@@ -24,7 +24,7 @@ final class AbstractServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    public function setUpMockService()
+    public function setUpMockService(): void
     {
         $this->client = new \Stripe\StripeClient(['api_key' => 'sk_test_123', 'api_base' => MOCK_URL]);
         // Testing with CouponService, because testing abstract classes is hard in PHP :/
@@ -34,13 +34,13 @@ final class AbstractServiceTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    public function setUpReflectors()
+    public function setUpReflectors(): void
     {
         $this->formatParamsReflector = new \ReflectionMethod(\Stripe\Service\AbstractService::class, 'formatParams');
         $this->formatParamsReflector->setAccessible(true);
     }
 
-    public function testNullGetsEmptyStringified()
+    public function testNullGetsEmptyStringified(): void
     {
         $this->expectException(\Stripe\Exception\InvalidRequestException::class);
         $this->service->update('id', [
@@ -48,7 +48,7 @@ final class AbstractServiceTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testRetrieveThrowsIfIdNullIsNull()
+    public function testRetrieveThrowsIfIdNullIsNull(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('The resource ID cannot be null or whitespace.');
@@ -56,7 +56,7 @@ final class AbstractServiceTest extends \PHPUnit\Framework\TestCase
         $this->service->retrieve(null);
     }
 
-    public function testRetrieveThrowsIfIdNullIsEmpty()
+    public function testRetrieveThrowsIfIdNullIsEmpty(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('The resource ID cannot be null or whitespace.');
@@ -64,7 +64,7 @@ final class AbstractServiceTest extends \PHPUnit\Framework\TestCase
         $this->service->retrieve('');
     }
 
-    public function testRetrieveThrowsIfIdNullIsWhitespace()
+    public function testRetrieveThrowsIfIdNullIsWhitespace(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('The resource ID cannot be null or whitespace.');
@@ -72,7 +72,7 @@ final class AbstractServiceTest extends \PHPUnit\Framework\TestCase
         $this->service->retrieve(' ');
     }
 
-    public function testFormatParams()
+    public function testFormatParams(): void
     {
         $result = $this->formatParamsReflector->invoke(null, ['foo' => null]);
         static::assertTrue('' === $result['foo']);

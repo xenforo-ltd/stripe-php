@@ -14,7 +14,7 @@ final class FileTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'file_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class FileTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\File::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class FileTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\File::class, $resource);
     }
 
-    public function testDeserializesFromFile()
+    public function testDeserializesFromFile(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'file',
@@ -43,7 +43,7 @@ final class FileTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\File::class, $obj);
     }
 
-    public function testDeserializesFromFileUpload()
+    public function testDeserializesFromFileUpload(): void
     {
         $obj = Util\Util::convertToStripeObject([
             'object' => 'file_upload',

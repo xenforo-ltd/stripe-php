@@ -29,7 +29,7 @@ final class OAuthErrorExceptionTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetters()
+    public function testGetters(): void
     {
         $e = $this->createFixture();
         static::assertSame(200, $e->getHttpStatus());
@@ -43,7 +43,7 @@ final class OAuthErrorExceptionTest extends \PHPUnit\Framework\TestCase
         static::assertSame('description', $e->getError()->error_description);
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $e = $this->createFixture();
         static::assertContains('(Request req_test)', (string) $e);

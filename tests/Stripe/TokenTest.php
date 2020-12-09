@@ -14,7 +14,7 @@ final class TokenTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 'tok_123';
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -24,7 +24,7 @@ final class TokenTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Token::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',

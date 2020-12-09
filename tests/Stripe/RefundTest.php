@@ -14,7 +14,7 @@ final class RefundTest extends \PHPUnit\Framework\TestCase
 
     const TEST_RESOURCE_ID = 're_123';
 
-    public function testIsListable()
+    public function testIsListable(): void
     {
         $this->expectsRequest(
             'get',
@@ -25,7 +25,7 @@ final class RefundTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Refund::class, $resources->data[0]);
     }
 
-    public function testIsRetrievable()
+    public function testIsRetrievable(): void
     {
         $this->expectsRequest(
             'get',
@@ -35,7 +35,7 @@ final class RefundTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Refund::class, $resource);
     }
 
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $this->expectsRequest(
             'post',
@@ -47,7 +47,7 @@ final class RefundTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Refund::class, $resource);
     }
 
-    public function testIsSaveable()
+    public function testIsSaveable(): void
     {
         $resource = Refund::retrieve(self::TEST_RESOURCE_ID);
         $resource->metadata['key'] = 'value';
@@ -59,7 +59,7 @@ final class RefundTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(\Stripe\Refund::class, $resource);
     }
 
-    public function testIsUpdatable()
+    public function testIsUpdatable(): void
     {
         $this->expectsRequest(
             'post',
