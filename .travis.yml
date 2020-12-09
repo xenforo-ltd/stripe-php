@@ -50,7 +50,8 @@ before_install:
 
 script:
   - ./build.php ${AUTOLOAD}
-  - make fmtcheck
-  - if [[ `php -r "echo \version_compare(PHP_VERSION, '7.1', '>=');"` && $AUTOLOAD == 1 ]]; then make phpstan; fi
+  # TODO: remove version check once PHP-CS-Fixer supports PHP 8 (https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues/4702)
+  - if [[ `php -r "echo \version_compare(PHP_VERSION, '8.0', '<');"` && $AUTOLOAD == 1 ]]; then make fmtcheck; fi
+  - make phpstan
 
 after_script: ./vendor/bin/php-coveralls -v
