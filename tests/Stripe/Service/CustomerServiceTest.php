@@ -39,7 +39,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
             '/v1/customers'
         );
         $resources = $this->service->all();
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\Customer::class, $resources->data[0]);
     }
 
@@ -50,7 +50,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
             '/v1/customers/' . self::TEST_RESOURCE_ID . '/balance_transactions'
         );
         $resources = $this->service->allBalanceTransactions(self::TEST_RESOURCE_ID);
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\CustomerBalanceTransaction::class, $resources->data[0]);
     }
 
@@ -61,7 +61,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
             '/v1/customers/' . self::TEST_RESOURCE_ID . '/sources'
         );
         $resources = $this->service->allSources(self::TEST_RESOURCE_ID);
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\AlipayAccount::class, $resources->data[0]);
     }
 
@@ -72,7 +72,7 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
             '/v1/customers/' . self::TEST_RESOURCE_ID . '/tax_ids'
         );
         $resources = $this->service->allTaxIds(self::TEST_RESOURCE_ID);
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\TaxId::class, $resources->data[0]);
     }
 

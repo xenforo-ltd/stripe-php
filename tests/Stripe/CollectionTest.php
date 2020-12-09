@@ -52,7 +52,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
         );
 
         $resources = $this->fixture->all();
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
     }
 
     public function testCanRetrieve(): void

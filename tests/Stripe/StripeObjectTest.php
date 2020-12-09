@@ -109,7 +109,7 @@ final class StripeObjectTest extends \PHPUnit\Framework\TestCase
 
         $converted = $s->toArray();
 
-        static::assertInternalType('array', $converted);
+        static::assertIsArray($converted);
         static::assertSame($array, $converted);
     }
 

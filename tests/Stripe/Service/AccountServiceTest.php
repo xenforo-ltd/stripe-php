@@ -39,7 +39,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
             '/v1/accounts'
         );
         $resources = $this->service->all();
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\Account::class, $resources->data[0]);
     }
 
@@ -50,7 +50,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
             '/v1/accounts/' . self::TEST_RESOURCE_ID . '/capabilities'
         );
         $resources = $this->service->allCapabilities(self::TEST_RESOURCE_ID);
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\Capability::class, $resources->data[0]);
     }
 
@@ -61,7 +61,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
             '/v1/accounts/' . self::TEST_RESOURCE_ID . '/external_accounts'
         );
         $resources = $this->service->allExternalAccounts(self::TEST_RESOURCE_ID);
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\BankAccount::class, $resources->data[0]);
     }
 
@@ -72,7 +72,7 @@ final class AccountServiceTest extends \PHPUnit\Framework\TestCase
             '/v1/accounts/' . self::TEST_RESOURCE_ID . '/persons'
         );
         $resources = $this->service->allPersons(self::TEST_RESOURCE_ID);
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\Person::class, $resources->data[0]);
     }
 

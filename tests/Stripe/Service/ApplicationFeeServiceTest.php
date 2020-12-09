@@ -37,7 +37,7 @@ final class ApplicationFeeServiceTest extends \PHPUnit\Framework\TestCase
             '/v1/application_fees'
         );
         $resources = $this->service->all();
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\ApplicationFee::class, $resources->data[0]);
     }
 
@@ -48,7 +48,7 @@ final class ApplicationFeeServiceTest extends \PHPUnit\Framework\TestCase
             '/v1/application_fees/' . self::TEST_RESOURCE_ID . '/refunds'
         );
         $resources = $this->service->allRefunds(self::TEST_RESOURCE_ID);
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\ApplicationFeeRefund::class, $resources->data[0]);
     }
 

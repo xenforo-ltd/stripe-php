@@ -21,7 +21,7 @@ final class CardTest extends \PHPUnit\Framework\TestCase
             '/v1/issuing/cards'
         );
         $resources = Card::all();
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\Issuing\Card::class, $resources->data[0]);
     }
 

@@ -24,7 +24,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
             '/v1/accounts'
         );
         $resources = Account::all();
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\Account::class, $resources->data[0]);
     }
 
@@ -134,7 +134,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
             '/v1/accounts/' . $account->id . '/persons'
         );
         $persons = $account->persons();
-        static::assertInternalType('array', $persons->data);
+        static::assertIsArray($persons->data);
         static::assertInstanceOf(\Stripe\Person::class, $persons->data[0]);
     }
 
@@ -167,7 +167,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
             '/v1/accounts/' . self::TEST_RESOURCE_ID . '/capabilities'
         );
         $resources = Account::allCapabilities(self::TEST_RESOURCE_ID);
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
     }
 
     public function testCanCreateExternalAccount(): void
@@ -221,7 +221,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
             '/v1/accounts/' . self::TEST_RESOURCE_ID . '/external_accounts'
         );
         $resources = Account::allExternalAccounts(self::TEST_RESOURCE_ID);
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
     }
 
     public function testCanCreateLoginLink(): void
@@ -289,7 +289,7 @@ final class AccountTest extends \PHPUnit\Framework\TestCase
             '/v1/accounts/' . self::TEST_RESOURCE_ID . '/persons'
         );
         $resources = Account::allPersons(self::TEST_RESOURCE_ID);
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
     }
 
     public function testSerializeNewAdditionalOwners(): void
