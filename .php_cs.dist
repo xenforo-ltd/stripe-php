@@ -8,7 +8,7 @@ return PhpCsFixer\Config::create()
         '@PhpCsFixer' => true,
         '@PhpCsFixer:risky' => true,
         '@PHP71Migration:risky' => true,
-        '@PHPUnit57Migration:risky' => true,
+        '@PHPUnit60Migration:risky' => true,
 
         // Additional rules
         'fopen_flags' => true,
