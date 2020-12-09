@@ -1,12 +1,7 @@
 export PHPDOCUMENTOR_VERSION := v3.0.0-rc
-export PHPSTAN_VERSION := 0.12.59
 
 vendor: composer.json
 	composer install
-
-vendor/bin/phpstan: vendor
-	curl -sfL https://github.com/phpstan/phpstan/releases/download/$(PHPSTAN_VERSION)/phpstan.phar -o vendor/bin/phpstan
-	chmod +x vendor/bin/phpstan
 
 vendor/bin/phpdoc: vendor
 	curl -sfL https://github.com/phpDocumentor/phpDocumentor/releases/download/$(PHPDOCUMENTOR_VERSION)/phpDocumentor.phar -o vendor/bin/phpdoc
