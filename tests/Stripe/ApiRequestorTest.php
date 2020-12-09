@@ -90,7 +90,7 @@ final class ApiRequestorTest extends \PHPUnit\Framework\TestCase
     public function testRaisesAuthenticationErrorWhenNoApiKey(): void
     {
         $this->expectException(\Stripe\Exception\AuthenticationException::class);
-        $this->expectExceptionMessageRegExp('#No API key provided#');
+        $this->expectExceptionMessageMatches('#No API key provided#');
 
         Stripe::setApiKey(null);
         Charge::create();

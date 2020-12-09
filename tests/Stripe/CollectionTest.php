@@ -30,7 +30,7 @@ final class CollectionTest extends \PHPUnit\Framework\TestCase
     public function testOffsetGetNumericIndex(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp('/You tried to access the \\d index/');
+        $this->expectExceptionMessageMatches('/You tried to access the \\d index/');
 
         $this->fixture[0];
     }

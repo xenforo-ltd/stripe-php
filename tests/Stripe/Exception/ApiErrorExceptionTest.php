@@ -45,6 +45,6 @@ final class ApiErrorExceptionTest extends \PHPUnit\Framework\TestCase
     public function testToString(): void
     {
         $e = $this->createFixture();
-        static::assertContains('(Request req_test)', (string) $e);
+        static::assertStringContainsString('(Request req_test)', (string) $e);
     }
 }

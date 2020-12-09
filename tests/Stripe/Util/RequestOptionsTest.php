@@ -23,7 +23,7 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
     public function testParseStringStrict(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp('#Do not pass a string for request options.#');
+        $this->expectExceptionMessageMatches('#Do not pass a string for request options.#');
 
         $opts = RequestOptions::parse('foo', true);
     }
@@ -161,14 +161,14 @@ final class RequestOptionsTest extends \PHPUnit\Framework\TestCase
     {
         $opts = RequestOptions::parse(['api_key' => 'sk_test_1234567890abcdefghijklmn']);
         $debugInfo = \print_r($opts, true);
-        static::assertContains('[apiKey] => sk_test_********************klmn', $debugInfo);
+        static::assertStringContainsString('[apiKey] => sk_test_********************klmn', $debugInfo);
 
         $opts = RequestOptions::parse(['api_key' => 'sk_1234567890abcdefghijklmn']);
         $debugInfo = \print_r($opts, true);
-        static::assertContains('[apiKey] => sk_********************klmn', $debugInfo);
+        static::assertStringContainsString('[apiKey] => sk_********************klmn', $debugInfo);
 
         $opts = RequestOptions::parse(['api_key' => '1234567890abcdefghijklmn']);
         $debugInfo = \print_r($opts, true);
-        static::assertContains('[apiKey] => ********************klmn', $debugInfo);
+        static::assertStringContainsString('[apiKey] => ********************klmn', $debugInfo);
     }
 }

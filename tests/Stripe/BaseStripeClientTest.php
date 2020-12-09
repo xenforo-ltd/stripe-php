@@ -97,7 +97,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
     public function testRequestThrowsIfOptsIsString(): void
     {
         $this->expectException(\Stripe\Exception\InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp('#Do not pass a string for request options.#');
+        $this->expectExceptionMessageMatches('#Do not pass a string for request options.#');
 
         $client = new BaseStripeClient(['api_base' => MOCK_URL]);
         $charge = $client->request('get', '/v1/charges/ch_123', [], 'foo');

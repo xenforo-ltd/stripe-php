@@ -41,7 +41,7 @@ final class OAuthTest extends \PHPUnit\Framework\TestCase
     public function testRaisesAuthenticationErrorWhenNoClientId(): void
     {
         $this->expectException(\Stripe\Exception\AuthenticationException::class);
-        $this->expectExceptionMessageRegExp('#No client_id provided#');
+        $this->expectExceptionMessageMatches('#No client_id provided#');
 
         Stripe::setClientId(null);
         OAuth::authorizeUrl();
