@@ -13,7 +13,7 @@ vendor/bin/phpdoc: vendor
 	chmod +x vendor/bin/phpdoc
 
 test: vendor
-	vendor/bin/phpunit
+	vendor/bin/phpunit --do-not-cache-result
 .PHONY: test
 
 fmt: vendor
