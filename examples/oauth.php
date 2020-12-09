@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require '../init.php';
 
 \Stripe\Stripe::setApiKey(\getenv('STRIPE_SECRET_KEY'));

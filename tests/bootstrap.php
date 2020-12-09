@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require_once __DIR__ . '/StripeMock.php';
 
 \define('MOCK_MINIMUM_VERSION', '0.89.0');
