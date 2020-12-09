@@ -181,7 +181,7 @@ final class BaseStripeClientTest extends \PHPUnit\Framework\TestCase
 
     public function testRequestWithOptsInParamsWarns()
     {
-        $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        $this->expectException(\PHPUnit\Framework\Error\Warning::class);
         $this->expectExceptionMessage('Options found in $params: api_key, stripe_account, api_base. Options should be '
             . 'passed in their own array after $params. (HINT: pass an empty array to $params if you do not have any.)');
         $client = new BaseStripeClient([
