@@ -533,7 +533,7 @@ class CurlClient implements ClientInterface
     /**
      * Checks if a list of headers contains a specific header name.
      *
-     * @param string[] $headers
+     * @param array<string> $headers
      * @param string $name
      *
      * @return bool

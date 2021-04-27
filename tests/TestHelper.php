@@ -69,7 +69,7 @@ trait TestHelper
      * @param string $path relative path (e.g. '/v1/charges')
      * @param null|array $params array of parameters. If null, parameters will
      *   not be checked.
-     * @param null|string[] $headers array of headers. Does not need to be
+     * @param null|array<string> $headers array of headers. Does not need to be
      *   exhaustive. If null, headers are not checked.
      * @param bool $hasFile Whether the request parameters contains a file.
      *   Defaults to false.

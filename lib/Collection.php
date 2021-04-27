@@ -8,7 +8,7 @@ namespace Stripe;
  * @property string $object
  * @property string $url
  * @property bool $has_more
- * @property \Stripe\StripeObject[] $data
+ * @property array<\Stripe\StripeObject> $data
  */
 class Collection extends StripeObject implements \Countable, \IteratorAggregate
 {
