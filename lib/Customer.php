@@ -32,7 +32,7 @@ namespace Stripe;
  * @property null|string $name The customer's full name or business name.
  * @property int $next_invoice_sequence The suffix of the customer's next invoice number, e.g., 0001.
  * @property null|string $phone The customer's phone number.
- * @property null|string[] $preferred_locales The customer's preferred locales (languages), ordered by preference.
+ * @property null|array<string> $preferred_locales The customer's preferred locales (languages), ordered by preference.
  * @property null|\Stripe\StripeObject $shipping Mailing and shipping address for the customer. Appears on invoices emailed to this customer.
  * @property \Stripe\Collection $sources The customer's payment sources, if any.
  * @property \Stripe\Collection $subscriptions The customer's current subscriptions, if any.

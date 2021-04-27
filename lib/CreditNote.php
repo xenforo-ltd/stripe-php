@@ -19,7 +19,7 @@ namespace Stripe;
  * @property string|\Stripe\Customer $customer ID of the customer.
  * @property null|string|\Stripe\CustomerBalanceTransaction $customer_balance_transaction Customer balance transaction related to this credit note.
  * @property int $discount_amount The integer amount in %s representing the total amount of discount that was credited.
- * @property \Stripe\StripeObject[] $discount_amounts The aggregate amounts calculated per discount for all line items.
+ * @property array<\Stripe\StripeObject> $discount_amounts The aggregate amounts calculated per discount for all line items.
  * @property string|\Stripe\Invoice $invoice ID of the invoice.
  * @property \Stripe\Collection $lines Line items that make up the credit note
  * @property bool $livemode Has the value <code>true</code> if the object exists in live mode or the value <code>false</code> if the object exists in test mode.
@@ -32,7 +32,7 @@ namespace Stripe;
  * @property null|string|\Stripe\Refund $refund Refund related to this credit note.
  * @property string $status Status of this credit note, one of <code>issued</code> or <code>void</code>. Learn more about <a href="https://stripe.com/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
  * @property int $subtotal The integer amount in %s representing the amount of the credit note, excluding tax and invoice level discounts.
- * @property \Stripe\StripeObject[] $tax_amounts The aggregate amounts calculated per tax rate for all line items.
+ * @property array<\Stripe\StripeObject> $tax_amounts The aggregate amounts calculated per tax rate for all line items.
  * @property int $total The integer amount in %s representing the total amount of the credit note, including tax and all discount.
  * @property string $type Type of this credit note, one of <code>pre_payment</code> or <code>post_payment</code>. A <code>pre_payment</code> credit note means it was issued when the invoice was open. A <code>post_payment</code> credit note means it was issued when the invoice was paid.
  * @property null|int $voided_at The time that the credit note was voided.
