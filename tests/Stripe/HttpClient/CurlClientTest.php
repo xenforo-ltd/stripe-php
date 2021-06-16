@@ -352,4 +352,31 @@ final class CurlClientTest extends \PHPUnit\Framework\TestCase
             \Stripe\ApiRequestor::setHttpClient(null);
         }
     }
+    public function testStreaming()
+    {
+        try {
+            $called = false;
+
+            $curl = new CurlClient();
+            $curl->setRequestStatusCallback(function ($rbody, $rcode, $rheaders, $errno, $message, $willBeRetried, $numRetries) use (&$called) {
+                $called = true;
+
+                $this->assertInternalType('string', $rbody);
+                $this->assertSame(200, $rcode);
+                $this->assertSame('req_123', $rheaders['request-id']);
+                $this->assertSame(0, $errno);
+                $this->assertNull($message);
+                $this->assertFalse($willBeRetried);
+                $this->assertSame(0, $numRetries);
+            });
+
+            \Stripe\ApiRequestor::setHttpClient($curl);
+
+            \Stripe\Charge::all();
+
+            static::assertTrue($called);
+        } finally {
+            \Stripe\ApiRequestor::setHttpClient(null);
+        }
+    }
 }

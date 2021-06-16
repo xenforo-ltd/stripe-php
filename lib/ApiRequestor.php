@@ -523,4 +523,16 @@ class ApiRequestor
 
         return self::$_httpClient;
     }
+
+    /**
+     * @return HttpClient\StreamingClientInterface
+     */
+    private function streamingHttpClient()
+    {
+        if (!self::$_httpClient) {
+            self::$_httpClient = HttpClient\CurlClient::instance();
+        }
+
+        return self::$_httpClient;
+    }
 }

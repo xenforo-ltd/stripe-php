@@ -5,7 +5,7 @@ namespace Stripe;
 /**
  * Interface for a Stripe client.
  */
-interface StripeClientInterface extends StripeClientConfigInterface
+interface StripeClientStreamingInterface extends StripeClientConfigInterface
 {
     /**
      * Sends a request to Stripe's API, returning a StripeObject representing a response on success.

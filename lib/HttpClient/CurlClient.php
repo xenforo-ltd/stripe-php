@@ -24,7 +24,7 @@ if (!\defined('CURL_HTTP_VERSION_2TLS')) {
     \define('CURL_HTTP_VERSION_2TLS', 4);
 }
 
-class CurlClient implements ClientInterface
+class CurlClient implements ClientInterface, StreamingClientInterface
 {
     protected static $instance;
 
@@ -193,8 +193,7 @@ class CurlClient implements ClientInterface
 
     // END OF USER DEFINED TIMEOUTS
 
-    public function request($method, $absUrl, $headers, $params, $hasFile)
-    {
+    private function constructRequest($method, $absUrl, $headers, $params, $hasFile) {
         $method = \strtolower($method);
 
         $opts = [];
@@ -274,12 +273,137 @@ class CurlClient implements ClientInterface
         // Stripe's API servers are only accessible over IPv4. Force IPv4 resolving to avoid
         // potential issues (cf. https://github.com/stripe/stripe-php/issues/1045).
         $opts[\CURLOPT_IPRESOLVE] = \CURL_IPRESOLVE_V4;
+        return [$opts, $absUrl];
+    }
+
+    public function request($method, $absUrl, $headers, $params, $hasFile)
+    {
+        list($opts, $absUrl) = $this->constructRequest($method, $absUrl, $headers, $params, $hasFile);
 
         list($rbody, $rcode, $rheaders) = $this->executeRequestWithRetries($opts, $absUrl);
 
         return [$rbody, $rcode, $rheaders];
     }
 
+    public function requestStreaming($method, $absUrl, $headers, $params, $hasFile, $onSuccess);
+        list($opts, $absUrl) = $this->constructRequest($method, $absUrl, $headers, $params, $hasFile);
+
+        $opts[\CURLOPT_RETURNTRANSFER] = false;
+
+        list($rbody, $rcode, $rheaders) = $this->executeRequestWithRetries($opts, $absUrl);
+
+        return []
+    }
+
+
+    // Curl gives us the ability to set two callbacks: \CURLOPT_HEADERFUNCTION -- which is
+    // called for every line in the header, and then \CURLOPT_WRITEFUNCTION -- which is called
+    // with bytes from the body.
+    //
+    // The thing is, what we want to do with the body really depends on information in the header.
+    // We might want to discard, buffer, or defer to a user-provided callback.
+    //
+    // This function is responsible for parsing the header, but it attempts to leave deciding
+    // what to do with the body up to the caller. After the header has been completely read
+    // and the body begins to stream, it will call $determineWriteCallback with the array of
+    // headers. $determineWriteCallback should, based on the headers it receives, return a
+    // "writeCallback" that describes what to do with the incoming HTTP response body.
+
+    private function processRequestHead($opts, $determineWriteCallback)
+    {
+        $rheaders = new Util\CaseInsensitiveArray();
+        $headerCallback = function ($curl, $header_line) use (&$rheaders) {
+            // Ignore the HTTP request line (HTTP/1.1 200 OK)
+            if (false === \strpos($header_line, ':')) {
+                return \strlen($header_line);
+            }
+            list($key, $value) = \explode(':', \trim($header_line), 2);
+            $rheaders[\trim($key)] = \trim($value);
+
+            return \strlen($header_line);
+        };
+
+        $writeCallback = null;
+        $writeCallbackWrapper = function ($curl, $data) use (&$writeCallback, &$rHeaders, &$determineWriteCallback) {
+          if (null === $writeCallback) {
+            $writeCallback = \call_user_func_array($determineWriteCallback, [$rheaders]);
+          }
+          return \call_user_func_array($writeCallback, [$curl, $data]);
+        }
+
+        return [$headerCallback, $writeCallbackWrapper];
+    }
+
+
+    private function executeStreamingRequestWithRetries($opts, $absUrl, $numRetries) {
+        while (true) {
+            $shouldRetry = false;
+            $rbody = null;
+            $succeeded = null;
+            $writeCallback = function ($rHeaders) use (&$shouldRetry) {
+                $errno = \curl_errno($this->curlHandle);
+                $message = \curl_error($this->curlHandle);
+                $rcode = \curl_getinfo($this->curlHandle, \CURLINFO_HTTP_CODE);
+                if ($errno) {
+                  $shouldRetry = $this->shouldRetry($errno, $rcode, $rheader, $numRetries);
+                } else {
+                  $shouldRetry = true
+                }
+                if ($shouldRetry) {
+                  $rbody = null;
+                  return function ($curl, $data) {
+                    throw new Exception\ApiConnectionException("Unexpected: received request body after the connection should have been retried");
+                  }
+                }
+                if ($rcode < 300) {
+                  $rbody = null;
+                  $succeeded = true;
+                  return function ($curl, $data) {
+                    echo "Got data: " . $data;
+                    return \strlen($data);
+                  };
+                }
+                $rbody = "";
+                return function ($curl, $data) {
+                  return \strlen($data);
+                }
+            }
+
+            list($headerCallback, $writeCallback) = $this->processRequestHead($opts)
+            $opts[\CURLOPT_HEADERFUNCTION] = $headerCallback;
+            $opts[\CURLOPT_WRITEFUNCTION] = $writeCallback;
+            \curl_exec($this->curlHandle);
+
+            $this->resetCurlHandle();
+            \curl_setopt_array($this->curlHandle, $opts);
+
+            if (false === $curl_result) {
+                $errno = \curl_errno($this->curlHandle);
+                $message = \curl_error($this->curlHandle);
+            } else {
+                $rcode = \curl_getinfo($this->curlHandle, \CURLINFO_HTTP_CODE);
+            }
+            if (!$this->getEnablePersistentConnections()) {
+                $this->closeCurlHandle();
+            }
+
+            $shouldRetry = $this->shouldRetry($errno, $rcode, $rheaders, $numRetries);
+
+            if ($shouldRetry) {
+                ++$numRetries;
+                $sleepSeconds = $this->sleepTime($numRetries, $rheaders);
+                \usleep((int) ($sleepSeconds * 1000000));
+            } else {
+                break;
+            }
+        }
+
+        if (false === $curlResult) {
+            $this->handleCurlError($absUrl, $errno, $message, $numRetries);
+        }
+
+        return [$curlResult, $rcode, $rheaders];
+    }
     /**
      * @param array $opts cURL options
      * @param string $absUrl
