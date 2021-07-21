@@ -103,4 +103,19 @@ final class PaymentIntentServiceTest extends \PHPUnit\Framework\TestCase
         ]);
         static::assertInstanceOf(\Stripe\PaymentIntent::class, $resource);
     }
+
+    public function testSearch()
+    {
+        $this->expectsRequest(
+            'get',
+            '/v1/search/payment_intents'
+        );
+        $resource = $this->service->search([
+            'query' => 'metadata["foo"]:"bar"',
+            'limit' => 3
+        ]);
+        static::assertInstanceOf(\Stripe\SearchResult::class, $resource);
+        static::assertInternalType('array', $resource->data);
+        static::assertInstanceOf(\Stripe\PaymentIntent::class, $resource->data[0]);
+    }
 }

@@ -83,4 +83,19 @@ final class ChargeServiceTest extends \PHPUnit\Framework\TestCase
         ]);
         static::assertInstanceOf(\Stripe\Charge::class, $resource);
     }
+
+    public function testSearch()
+    {
+        $this->expectsRequest(
+            'get',
+            '/v1/search/charges'
+        );
+        $resource = $this->service->search([
+            'query' => 'metadata["foo"]:"bar"',
+            'limit' => 3
+        ]);
+        static::assertInstanceOf(\Stripe\SearchResult::class, $resource);
+        static::assertInternalType('array', $resource->data);
+        static::assertInstanceOf(\Stripe\Charge::class, $resource->data[0]);
+    }
 }

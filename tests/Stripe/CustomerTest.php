@@ -255,4 +255,19 @@ final class CustomerTest extends \PHPUnit\Framework\TestCase
         $resources = Customer::allBalanceTransactions(self::TEST_RESOURCE_ID);
         static::assertInternalType('array', $resources->data);
     }
+
+    public function testIsSearchable()
+    {
+        $this->expectsRequest(
+            'get',
+            '/v1/search/customers'
+        );
+        $resource = Customer::search([
+            'query' => 'metadata["foo"]:"bar"',
+            'limit' => 3
+        ]);
+        static::assertInstanceOf(\Stripe\SearchResult::class, $resource);
+        static::assertInternalType('array', $resource->data);
+        static::assertInstanceOf(\Stripe\Customer::class, $resource->data[0]);
+    }
 }

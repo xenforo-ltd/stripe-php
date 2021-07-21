@@ -249,4 +249,19 @@ final class CustomerServiceTest extends \PHPUnit\Framework\TestCase
         $resource = $this->service->verifySource(self::TEST_RESOURCE_ID, self::TEST_SOURCE_ID, ['amounts' => [32, 45]]);
         static::assertInstanceOf(\Stripe\BankAccount::class, $resource);
     }
+
+    public function testSearch()
+    {
+        $this->expectsRequest(
+            'get',
+            '/v1/search/customers'
+        );
+        $resource = $this->service->search([
+            'query' => 'metadata["foo"]:"bar"',
+            'limit' => 3
+        ]);
+        static::assertInstanceOf(\Stripe\SearchResult::class, $resource);
+        static::assertInternalType('array', $resource->data);
+        static::assertInstanceOf(\Stripe\Customer::class, $resource->data[0]);
+    }
 }

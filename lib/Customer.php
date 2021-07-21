@@ -49,6 +49,7 @@ class Customer extends ApiResource
     use ApiOperations\Delete;
     use ApiOperations\NestedResource;
     use ApiOperations\Retrieve;
+    use ApiOperations\Search;
     use ApiOperations\Update;
 
     const TAX_EXEMPT_EXEMPT = 'exempt';
@@ -78,6 +79,21 @@ class Customer extends ApiResource
         $url = $this->instanceUrl() . '/discount';
         list($response, $opts) = $this->_request('delete', $url, $params, $opts);
         $this->refreshFrom(['discount' => null], $opts, true);
+    }
+
+    /**
+     * @param null|array $params
+     * @param null|array|string $opts
+     *
+     * @throws \Stripe\Exception\ApiErrorException if the request fails
+     *
+     * @return \Stripe\SearchResult the customer search results
+     */
+    public static function search($params = null, $opts = null)
+    {
+        $url = '/v1/search/customers';
+
+        return self::_searchResource($url, $params, $opts);
     }
 
     const PATH_BALANCE_TRANSACTIONS = '/balance_transactions';

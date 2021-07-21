@@ -158,6 +158,21 @@ class PaymentIntentService extends \Stripe\Service\AbstractService
     }
 
     /**
+     * Search for Payment Intent API resources within specific restrictions.
+     *
+     * @param null|array $params
+     * @param null|array|\Stripe\Util\RequestOptions $opts
+     *
+     * @throws \Stripe\Exception\ApiErrorException if the request fails
+     *
+     * @return \Stripe\SearchResult
+     */
+    public function search($params = null, $opts = null)
+    {
+        return $this->requestSearchResult('get', '/v1/search/payment_intents', $params, $opts);
+    }
+
+    /**
      * Updates properties on a PaymentIntent object without confirming.
      *
      * Depending on which properties you update, you may need to confirm the
