@@ -19,7 +19,7 @@ final class TaxCodeTest extends \PHPUnit\Framework\TestCase
             '/v1/tax_codes'
         );
         $resources = TaxCode::all();
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\TaxCode::class, $resources->data[0]);
     }
 

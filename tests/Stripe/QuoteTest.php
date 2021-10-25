@@ -19,7 +19,7 @@ final class QuoteTest extends \PHPUnit\Framework\TestCase
             '/v1/quotes'
         );
         $resources = Quote::all();
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\Quote::class, $resources->data[0]);
     }
 
@@ -116,7 +116,7 @@ final class QuoteTest extends \PHPUnit\Framework\TestCase
             '/v1/quotes/' . self::TEST_RESOURCE_ID . '/line_items'
         );
         $resources = Quote::allLineItems(self::TEST_RESOURCE_ID);
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
     }
 
     public function testCanPdf()

@@ -34,7 +34,7 @@ final class VerificationSessionServiceTest extends \PHPUnit\Framework\TestCase
             '/v1/identity/verification_sessions'
         );
         $resources = $this->service->all();
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\Identity\VerificationSession::class, $resources->data[0]);
     }
 

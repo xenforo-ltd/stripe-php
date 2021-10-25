@@ -34,7 +34,7 @@ final class QuoteServiceTest extends \PHPUnit\Framework\TestCase
             '/v1/quotes'
         );
         $resources = $this->service->all();
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\Quote::class, $resources->data[0]);
     }
 
@@ -109,7 +109,7 @@ final class QuoteServiceTest extends \PHPUnit\Framework\TestCase
             '/v1/quotes/' . self::TEST_RESOURCE_ID . '/line_items'
         );
         $resources = $this->service->allLineItems(self::TEST_RESOURCE_ID);
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
     }
 
     public function testPdf()

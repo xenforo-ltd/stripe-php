@@ -18,7 +18,7 @@ final class VerificationReportTest extends \PHPUnit\Framework\TestCase
             '/v1/identity/verification_reports'
         );
         $resources = VerificationReport::all();
-        static::assertInternalType('array', $resources->data);
+        static::assertIsArray($resources->data);
         static::assertInstanceOf(\Stripe\Identity\VerificationReport::class, $resources->data[0]);
     }
 
